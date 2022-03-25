@@ -1,0 +1,43 @@
+'''
+Problem:
+
+  Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
+  For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
+
+'''
+
+# This is problem is solved using two methods they are:
+
+# Method 1: Using Dictionaries
+
+
+lst=list(map(int,input().split()))
+k=int(input())
+d=dict()
+flag=True
+for i in range(len(lst)):
+	if(d.get(lst[i]) is not None):
+		print("k is formed by adding",d[lst[i]],lst[i])
+		flag=False
+		break
+	else:
+		d[k-lst[i]]=lst[i]
+if(flag):
+	print(k,"is not possible to represent as a sum of two numbers in the given list")
+
+
+
+Method 2: Using sets:
+
+
+lst=list(map(int,input().split()))
+k=int(input())
+flag=False
+h=set()
+for i in range(len(lst)):
+	if(k-lst[i] in h):
+		flag=True
+		break
+	else:
+		h.add(lst[i])
+print(flag)
