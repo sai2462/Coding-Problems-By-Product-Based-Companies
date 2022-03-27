@@ -1,0 +1,77 @@
+'''
+
+Given the root to a binary tree, implement serialize(root), which serializes the tree into a string, and deserialize(s), which deserializes the string back into the tree.
+
+
+'''
+
+
+
+class Node:
+	def __init__(self,key):
+		self.val=key
+		self.left=None
+		self.right=None
+class Tree:
+	def __init__(self):
+		self.root=None
+	def addNode(self,node,val):
+		if(node==None):
+			self.root=Node(val)
+		else:
+			if(val<node.val):
+				if(not node.left):
+					node.left=Node(val)
+				else:
+					self.addNode(node.left,val)
+			else:
+				if(not node.right):
+					node.right=Node(val)
+				else:
+					self.addNode(node.right,val)
+
+def serialize(root):
+	vals=[]
+	def serializer(root):
+		if(root==None):
+			vals.append("?")
+		else:
+			vals.append(str(root.val))
+			serializer(root.left)
+			serializer(root.right)
+	serializer(root)
+	return " ".join(vals)
+
+
+def deserialize(s):
+	vals=iter(s.split(" "))
+	def deserilizer():
+		val=next(vals)
+		if(val=="?"):
+			return None
+		else:
+			node=Node(int(val))
+			node.left=deserilizer()
+			node.right=deserilizer()
+			return node 
+	return deserilizer()
+
+
+def inorder(root):
+	if(root):
+		inorder(root.left)
+		print(root.val)
+		inorder(root.right)
+
+
+nums=list(map(int,input().split()))
+t=Tree()
+for i in nums:
+	t.addNode(t.root,i)
+print("Inorder is:")
+inorder(t.root)
+
+s=serialize(t.root)
+print("seriazed tree is:",s)
+
+print("Serialized after deserilized is:",serialize(deserialize(s)))
