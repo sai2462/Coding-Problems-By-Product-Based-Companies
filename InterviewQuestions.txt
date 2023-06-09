@@ -1,5 +1,5 @@
 Program Number : 1 
-File path: C:\Users\sudhe\Documents\Placements\Arrays\3sum.py
+
 
 
 '''
@@ -33,7 +33,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 Program Number : 2 
-File path: C:\Users\sudhe\Documents\Placements\Arrays\BoyerMorry.py
 
 
 '''
