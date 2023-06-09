@@ -1,0 +1,8191 @@
+Program Number : 1 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\3sum.py
+
+
+'''
+
+Given a list and x find there is any possible combination of sum of 3 integers is equal to x
+
+'''
+
+def threeSum(nums,s):
+	nums.sort()
+	n=len(nums)
+	for i in range(n-2):
+		x=nums[i]
+		l,r=i+1,n-1
+		while(l<r):
+			temp=x+nums[l]+nums[r]
+			if(temp==s):
+				return True
+			elif(temp>s):
+				r-=1
+			else:
+				l+=1
+	return False
+nums=list(map(int,input().split()))
+s=int(input("Enter required sum:"))
+print(threeSum(nums,s))
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 2 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\BoyerMorry.py
+
+
+'''
+Given a list you need to return an element in the list that accours minm of n/2+1 times.
+
+Time complexity :O(n)
+
+Space Complexity :O(1)
+'''
+nums=list(map(int,input().split()))
+majorityEle=0
+votes=1
+for i in range(len(nums)):
+	if(nums[i]==nums[majorityEle]):
+		votes+=1
+	else:
+		votes-=1
+	if(votes==0):
+		majorityEle=i
+		votes=1
+print("Majority element is",nums[majorityEle])
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 3 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\CountMoreHalf.py
+
+
+'''
+
+Given a sorted array A of size n find an element tht occurs more than n/2 times.
+
+Time complexity : O(n)
+Space complexity :O(1)
+
+'''
+
+lst=list(map(int,input().split()))
+n=len(lst)
+for i in range(n//2+1):
+	if(lst[i]==lst[i+n//2]):
+		print(lst[i])
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 4 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\CountRightMinmEle.py
+
+
+'''
+	Count number of smaller elements on right of each element in array.
+
+	Time complexity : O(Nlogn)
+	Space complexity : O(N)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.val=val
+		self.left=None
+		self.right=None
+		self.count=1
+		self.lcount=0
+class Tree:
+	def __init__(self,root):
+		self.root=root
+	def insert(self,node):
+		cnt=0
+		cur=self.root
+		while(cur!=None):
+			prev=cur
+			if(node.val>cur.val):
+				cnt+=cur.lcount+cur.count
+				cur=cur.right
+			elif(node.val<cur.val):
+				cur.lcount+=1
+				cur=cur.left
+			else:
+				prev=cur	
+				cur.count+=1
+				break
+		if(prev.val>node.val):
+			prev.left=node 
+		elif(prev.val<node.val):
+			prev.right=node 
+		else:
+			return cnt+prev.lcount
+		return cnt
+def countSmallerElements(nums):
+	t=Tree(Node(nums[-1]))
+	res=[0]
+	for i in range(len(nums)-2,-1,-1):
+		res.append(t.insert(Node(nums[i])))
+	return res[::-1]
+nums=list(map(int,input().split()))
+print(countSmallerElements(nums))
+
+
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 5 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\EquilibriumSum.py
+
+
+'''
+
+Find the equilibrium index in an array.
+
+time complexity : O(n)
+space complexity : O(n)
+
+'''
+
+def equlibriumSum(nums):
+	n=len(nums)
+	s,leftSum=sum(nums),0
+	for i in range(n):
+		s-=nums[i]
+		if(leftSum==s):
+			return i
+		leftSum+=nums[i]
+	return -1
+print(equlibriumSum([7,2,1,2,6,4,18]))
+
+'''
+	7+2+1=6+4+0
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 6 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\EquilibriumSumInclusive.py
+
+
+'''
+
+Find the equilibrium index in an array.
+
+time complexity : O(n)
+space complexity : O(n)
+
+'''
+
+def equlibriumSum(nums):
+	n=len(nums)
+	s,leftSum=sum(nums),0
+	for i in range(n):
+		s-=nums[i]
+		leftSum+=nums[i]
+		if(leftSum==s):
+			return i
+	return -1
+print(equlibriumSum([7,2,1,2,6]))
+
+'''
+	7+2==1+2+6
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 7 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\LinearSearch.py
+
+
+'''
+Given a list of elements you need search for an element in the list.
+
+Time complexity=O(n)
+
+'''
+lst=[i for i in range(1,11)]
+n=int(input("Enter element to search:"))
+for i in range(len(lst)):
+	if(lst[i]==n):
+		print("element found at index ",i)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 8 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\LinearSearchLinkedList.py
+
+
+''''
+Linear search in linked list.
+
+Time Complexity =O(n)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.val=val
+		self.next=None
+class LinkedList:
+	def __init__(self,val):
+		self.head=Node(val)
+	def insert(self,val):
+		ptr=self.head
+		while(ptr.next):
+			ptr=ptr.next
+		ptr.next=Node(val)
+	def search(self,target):
+		ptr=self.head
+		while(ptr!=None):
+			if(ptr.val==target):
+				return True
+			ptr=ptr.next
+		return False
+lst=LinkedList(1)
+for i in range(2,10,2):
+	lst.insert(i)
+findings=list(map(int,input().split()))
+for i in findings:
+	print(lst.search(i))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 9 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\MajarityEle.py
+
+
+'''
+Given a list you need to return an element in the list that accours minm of n/2+1 times.
+
+Time complexity :O(n)
+
+Space Complexity :O(n)
+'''
+
+numsCount=dict()
+nums=list(map(int,input().split()))
+mxCount=0
+for i in nums:
+	if(numsCount.get(i)!=None):
+		numsCount[i]+=1
+		if(mxCount<numsCount[i]):
+			mxCount=i 
+	else:
+		numsCount[i]=1
+if(mxCount==0):
+	print("Maximum element is ",nums[0])
+else:
+	print("Maximum element is",mxCount)
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 10 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\MaxDiff.py
+
+
+'''
+
+Find maximum differance between two elements in an array such that larger element comes after the smaller number.
+
+Time complexity :O(n**2)
+'''
+
+nums=list(map(int,input().split()))
+n=len(nums)
+maxDiff=0
+for i in range(n):
+	a=nums[i]
+	for j in range(i+1,n):
+		x=nums[j]
+		if(maxDiff<(x-a)):
+			maxDiff=x-a
+			b=nums[j]
+print("maximum differance is ",maxDiff)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 11 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\MaxDiffCon.py
+
+
+'''
+Given a list of element find the maximum difference b/w two elements such that larger element is always comes after the smaller one.
+
+Time Complexity: O(n)
+'''
+
+nums=list(map(int,input().split()))
+mnf=nums[0]			#mnf=MinmSoFar
+maxDiff=max(nums[1]-nums[0],0)
+for i in range(2,len(nums)):
+	mnf=min(mnf,nums[i])
+	maxDiff=max(maxDiff,nums[i]-mnf)
+print("Maximum difference is:",maxDiff)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 12 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\MaxDiffO(N).py
+
+
+'''
+
+Find maximum differance between two elements in an array such that larger element comes after the smaller number.
+
+Time complexity :O(n)
+'''
+
+nums=list(map(int,input().split()))
+msf=nums[0]				#msf=MinSoFar
+mdf=nums[1]-nums[0]		#mdf=MaxDiffSoFar
+for i in range(2,len(nums)):
+	msf=min(msf,nums[i-1])
+	mdf=max(mdf,nums[i]-msf)
+print("Maximum difference is",mdf)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 13 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\MaxEleArray.py
+
+
+'''
+Given a list you need to return an element in the list that accours minm of n/2+1 times.
+
+Time complexity :O(n)
+
+Space Complexity :O(1)
+'''
+def maxEle(arr):
+	n=len(arr)
+	maxInd=0
+	count=1
+	for ind in range(1,n):
+		if(arr[ind]!=arr[maxInd]):
+			count-=1
+		else:
+			count+=1
+		if(count==0):
+			maxInd=ind
+			count=1
+	if(count>0):
+		print("maxm element is",arr[maxInd])
+		return
+	print("No maxm element")
+arr=list(map(int,input().split()))
+maxEle(arr)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 14 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\MaxSubArray.py
+
+
+'''
+
+Given an array return the maximum sum subarray in that array.
+
+Time complexity :O(n)
+'''
+
+nums=list(map(int,input().split()))
+maxm=nums[0]
+for i in range(1,len(nums)):
+	if(nums[i-1]>0):
+		nums[i]+=nums[i-1]
+	maxm=max(maxm,nums[i])
+print("Maximum sub array is",maxm)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 15 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\NextGreater.py
+
+
+'''
+	
+	given a number find the next element which is greater than the given number and no other possible smaller elements than that.
+
+'''
+
+def nextGreater(num):
+	n=len(num)
+	for i in range(n-2,-1,-1):
+		mn=i+1
+		for j in range(i+2,n):
+			if(num[j]<num[mn] and num[j]>num[i]):
+				mn=j
+		if(num[i]<num[mn]):
+			num[mn],num[i]=num[i],num[mn]
+			for j in range(i+1,n):
+				for k in range(j+1,n):
+					if(num[j]>num[k]):
+						num[j],num[k]=num[k],num[j]
+			return num
+num=list(map(int,input().split()))
+print(nextGreater(num))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 16 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\OccuranceOfFirst1.py
+
+
+'''
+
+Given an array of infinite size contains 0's and 1's in sorted order find the index of the first occurance of 1.
+
+
+Let p be the position of element to be searched. Number of steps for finding high index ‘h’ is O(Log p). The value of ‘h’ must be less than 2*p.
+The number of elements between h/2 and h must be O(p).
+Therefore, time complexity of Binary Search step is also O(Log p) and overall time complexity is 2*O(Log p) which is O(Log p).
+'''
+
+def arrIndex(nums,low,high):
+	if(low<=high):
+		mid=(low+high)//2
+		if(nums[mid]==1 and (mid==0 or nums[mid-1]==0)):
+			return mid 
+		elif(nums[mid]==1):
+			return arrIndex(nums,low,mid-1)
+		else:
+			return arrIndex(nums,mid+1,high)
+	# while(low<=high):
+	# 	mid=(low+high)//2
+	# 	if(nums[mid]==1 and (mid==0 or nums[mid-1]==0)):
+	# 		return mid
+	# 	elif(nums[mid]==1):
+	# 		high=mid-1
+	# 	else:
+	# 		low=mid+1
+# def posOfFirst1(nums):
+# 	low=0
+# 	high=1
+# 	while(nums[high]!=1):
+# 		low=high
+# 		high*=2
+# 	return arrIndex(nums,low,high)
+nums=list(map(int,input().split()))
+print(arrIndex(nums,0, len(nums)-1))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 17 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\OddNum.py
+
+
+'''
+Find the number that occur odd number of times in an array given that exaxtly one occurs odd nummber of times.
+
+Time complexity : O(n)
+Space complexity :O(1)
+
+'''
+nums=list(map(int,input().split()))
+res=0
+for i in nums:
+	res=res^i
+print("Requred number is :",res)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 18 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\ProductWithoutDivision.py
+
+
+'''
+	
+	Given an array of integers return an array such that it contains the product of all elements except itself.
+
+'''
+
+def productExpectItself(nums):
+	leftProduct=[1]
+	reightProduct=[1]
+	n=len(nums)
+	for i in range(n-1):
+		leftProduct.append(nums[i]*leftProduct[-1])
+	for i in range(n-1,0,-1):
+		reightProduct.insert(0,nums[i]*reightProduct[0])
+	res=[]
+	for i in range(n):
+		res.append(leftProduct[i]*reightProduct[i])
+	return res
+print(productExpectItself([1,2,3,4]))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 19 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\Separeate0and1.py
+
+
+'''
+Separate 0's and 1's in the list.
+
+Time complexity: O(N)
+Space Complexity:O(1)
+
+'''
+nums=list(map(int,input().split()))
+l=0
+r=len(nums)-1
+while(l<r):
+	while(nums[r]!=0 and l<r):
+		r-=1
+	while(nums[l]!=1 and l<r):
+		l+=1
+	if(l<r):
+		temp=nums[l]
+		nums[l]=nums[r]
+		nums[r]=temp
+		l+=1
+		r-=1
+print(nums)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 20 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\SepareateEven'sandOdd's.py
+
+
+'''
+
+Given  a list of numbers separate even and odd numbers 
+
+'''
+nums=list(map(int,input().split()))
+l,r=0,len(nums)-1
+while(l<r):
+	while(nums[r]%2==1 and l<r):
+		r-=1
+	while(nums[l]%2==0 and l<r):
+		l+=1
+	if(l<r):
+		nums[l],nums[r]=nums[r],nums[l]
+print(nums)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 21 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\SubArrayWithEqual0and1.py
+
+
+'''
+	find the largest sub array with equal number of zeros and one's
+'''
+
+
+def equalSubArray(nums):
+	d=dict()
+	s=l=r=0
+	diff=0
+	for i in range(len(nums)):
+		s+=nums[i]
+		if(s==0 and diff<i):
+			l=0
+			r=i
+			diff=r
+		if(d.get(s)==None):
+			d[s]=i 
+		else:
+			if(i-(d.get(s))>diff):
+				l=d.get(s)
+				r=i
+				diff=r-l
+	print(l,r)
+	return nums[l:r+1:]
+nums=list(map(int,input().split()))
+for i in range(len(nums)):
+	if(nums[i]==0):
+		nums[i]=-1
+print(equalSubArray(nums))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 22 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\SumCloseTo0.py
+
+
+'''
+
+Given a list print the nearest sum that can add 2 numbers and the sum is close to 0
+
+'''
+
+nums=list(map(int,input().split()))
+nums.sort()
+l,r=0,len(nums)-1
+while(l<r):
+	res=nums[l]+nums[r]
+	if(res==0):
+		print("0 is nearest value and the numbers are",nums[l],nums[r])
+		break
+	elif(res>0):
+		r-=1
+	else:
+		l+=1
+if(l>=r):
+	print(res,"is the nearest value and the numbers are",nums[l],nums[r])
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 23 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\SumPair.py
+
+
+'''
+Given a list and the required sum return all the possible pairs in the list that can sum upto required sum.
+
+Time Complexity=O(n)
+
+'''
+
+lst=[1,2,3,4,5,6,7,8,9]
+hmap=dict()
+s=int(input("Enter sum:"))
+for i in lst:
+	temp=s-i
+	if(hmap.get(temp)!=None):
+		print(s,"=",i,"+",temp)
+	hmap[i]=1
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 24 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\SumToX.py
+
+
+'''
+	Given an array of integers find the sum of sub array whose sum is equal to x.
+
+	Time complexity =O(n)
+	Space complexity = O(1)
+
+'''
+
+def SumToX(nums,target):
+	l=r=0
+	n=len(nums)
+	s=0
+	while(r<n):
+		if(s==target):
+			return True
+		elif(s<target):
+			r+=1
+			s+=nums[r]
+		else:
+			s-=nums[l]
+			l+=1
+	return False
+nums=list(map(int,input().split()))
+target=int(input())
+print(SumToX(nums,target))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 25 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\SumToXNegative.py
+
+
+'''
+	Given an array of integers find the sum of sub array whose sum is equal to x.
+
+	Time complexity =O(n)
+	Space complexity = O(n)
+
+'''
+
+def sumToX(nums,target):
+	l=r=s=0
+	n=len(nums)
+	d=dict()
+	for i in range(n):
+		s+=nums[i]
+		req=s-target
+		if(d.get(req)!=None):
+			return True
+		d[s]=1
+	return False
+nums=list(map(int,input().split()))
+target=int(input())
+print(sumToX(nums,target))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 26 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\TrappinRainProblem.py
+
+
+'''
+	Trapping rain problem: given the capacities of bars find the total water can store using the bars.
+'''
+
+def maxWater(caps):
+	left=[caps[0]]
+	reight=[caps[-1]]
+	n=len(caps)
+	for i in range(1,n):
+		left.append(max(caps[i],left[-1]))
+	for i in range(n-2,-1,-1):
+		reight.insert(0,max(caps[i],reight[0]))
+	res=0
+	for i in range(n):
+		res+=min(left[i],reight[i])-caps[i]
+	return res
+print(maxWater([1,0,2,0,1,0,3,1,0,2]))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 27 
+File path: C:\Users\sudhe\Documents\Placements\Arrays\WaveForm.py
+
+
+'''
+
+	Sort an array in wave form.
+
+'''
+
+def waveArr(nums):
+	n=len(nums)
+	flag=True if(nums[0]<nums[1]) else False
+	for i in range(1,n-1,2):
+		if(nums[i]<nums[i-1]):
+			nums[i],nums[i-1]=nums[i-1],nums[i]
+		if(nums[i]<nums[i+1]):
+			nums[i],nums[i+1]=nums[i+1],nums[i]
+	return nums
+nums=list(map(int,input().split()))
+print(waveArr(nums))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 28 
+File path: C:\Users\sudhe\Documents\Placements\Backtracking\BinaryCodes.py
+
+
+'''
+
+BACKTRACKING
+
+print all binary numbers for given bits
+'''
+
+def binaryCOdeGenerator(arr,l,h):
+	if(l==h):
+		print("".join(arr))
+	else:
+		arr[l]="0"
+		binaryCOdeGenerator(arr,l+1,h)	
+		arr[l]="1"
+		binaryCOdeGenerator(arr,l+1,h)
+n=int(input())
+arr=["0"]*n
+print("binary numbers of digit ",n,"are:")
+binaryCOdeGenerator(arr,0,n)	
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 29 
+File path: C:\Users\sudhe\Documents\Placements\Backtracking\NqueesProblem.py
+
+
+'''
+	N queens problem
+'''
+
+global n 
+n=int(input())
+
+def printResBoard(board):
+	for i in range(n):
+		for j in range(n):
+			print(board[i][j],end=" ")
+		print()
+
+def isSafe(board,row,col):
+	for i in range(col):
+		if(board[row][i]==1):
+			return False
+	for i,j in zip(range(row,-1,-1),range(col,-1,-1)):
+		if(board[i][j]==1):
+			return False
+	for i,j in zip(range(row,n,1),range(col,-1,-1)):
+		if(board[i][j]==1):
+			return False
+	return True
+
+def solveQueens(board,col):
+	if(col>=n):
+		return True
+	for i in range(n):
+		if(isSafe(board,i,col)):
+			board[i][col]=1
+			if(solveQueens(board,col+1)):
+				return True
+			board[i][col]=0
+	return False
+
+
+board=[[0 for i in range(n)] for i in range(n)]
+if(solveQueens(board,0)==False):
+	print("placing queens is not possible")
+else:
+	print("queens are placed succesfully and the resultant board is:")
+	printResBoard(board)
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 30 
+File path: C:\Users\sudhe\Documents\Placements\Backtracking\PermutationOfStr.py
+
+
+'''
+
+Given a string print all the possible combinations of that string
+
+'''
+
+def permutationOfStr(s,l,h):
+	if(l==h):
+		print("".join(s))
+	else:
+		for i in range(l,h+1):
+			s[l],s[i]=s[i],s[l]
+			permutationOfStr(s,l+1,h)
+			s[l],s[i]=s[i],s[l]
+s=[i for i in input()]
+print("All combinations of ",s,"are:")
+permutationOfStr(s,0,len(s)-1)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 31 
+File path: C:\Users\sudhe\Documents\Placements\Backtracking\RatInMaize.py
+
+
+'''
+	Rat in maze problem.
+
+'''
+
+n=4
+def printSolution(sol):
+	for row in sol:
+		for ele in row:
+			print(str(ele)+" ",end=" ")
+		print()
+def isSafe(maze,x,y):
+	if(x>=0 and x<n and y>=0 and y<n and maze[x][y]==1):
+		return True
+	return False
+def solveMaze(maze):
+	sol=[[0 for j in range(4)] for i in range(4)]
+	if(solveMazeUtil(maze,0,0,sol)==False):
+		print("solution doesn't exist")
+		return False
+	printSolution(sol)
+	return True
+
+def solveMazeUtil(maze,x,y,sol):
+	if(x==n-1 and y==n-1 and maze[x][y]==1):
+		sol[x][y]=1
+		return True
+	if(isSafe(maze,x,y)):
+		if(sol[x][y]==1):
+			return False
+		sol[x][y]=1
+		if(solveMazeUtil(maze,x+1,y,sol)):
+			return True
+		if(solveMazeUtil(maze,x,y+1,sol)):
+			return True
+		if(solveMazeUtil(maze,x-1,y,sol)):
+			return True
+		if(solveMazeUtil(maze,x,y-1,sol)):
+			return True
+		sol[x][y]=0
+		return False
+maze=[[1,0,0,0],[1,1,0,1],[0,1,0,0],[1,1,1,1]]
+solveMaze(maze)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 32 
+File path: C:\Users\sudhe\Documents\Placements\Backtracking\TheKnightTour.py
+
+
+'''
+
+	The Knight Tour's problem
+
+'''
+global n
+n=8
+def isSafe(board,x,y):
+	if(x>=0  and x<=n and y>=0 and y<=n and board[x][y]!=-1):
+		return True
+	return False
+
+def printBoard(board):
+	for i in range(n):
+		for j in range(n):
+			print(board[i][j],end=" ")
+		print()
+
+def solveKT():
+	board=[[-1 for i in range(n)] for j in range(n)]
+	mov_x=[2,1,-1,-2,-2,-1,1,2]
+	mov_y=[1,2,2,1,-1,-2,-2,-1]
+	board[0][0]=0
+	pos=1
+	if(solveKTUtil(board,0,0,mov_x,mov_y,pos)):
+		printBoard(board)
+	else:
+		print("solution does not exist")
+
+def solveKTUtil(board,cur_x,cur_y,mov_x,mov_y,pos):
+	if(pos==n*n):
+		return True
+	for i in range(n):
+		new_x=cur_x+mov_x[i]
+		new_y=cur_y+mov_y[i]
+		if(isSafe(board,new_x,new_y)):
+			board[new_x][new_y]=pos
+			if(solveKTUtil(board,new_x,new_y,mov_x,mov_y,pos+1)):
+				return True
+			board[new_x][new_y]=-1
+	return False
+solveKT()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 33 
+File path: C:\Users\sudhe\Documents\Placements\Backtracking\WORD.PY
+
+
+s=input()
+print('number of characters in given file::',len(s))
+word=1
+line_count=1
+letter=len(s)
+for i in s:
+	if i==' 'or i=='.':
+		word=word+1
+		letter=letter-1
+	if(i=='\n'):
+		line_count+=1
+print('number of letters in given file::',letter)
+print('number of words in given file::',word)
+print('number of lines in given file::',line_count)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 34 
+File path: C:\Users\sudhe\Documents\Placements\BitManipulation\checkKthBit.py
+
+
+'''
+	check k'th bit is set or not
+'''
+
+def checkSetLeftShift(n,k):
+	if(n&(1<<k-1)):
+		print("SET")
+	else:
+		print("NOT SET")
+
+def checkSetRightShift(n,k):
+	if(n>>k-1 and 1):
+		print("SET")
+	else:
+		print("NOT SET")
+
+def checkBit(n,k):
+	if((n&(1<<k))!=0):
+		print("SET")
+	else:
+		print("NOT SET")
+n=int(input())
+k=int(input())
+checkSetLeftShift(n,k)
+checkSetRightShift(n,k)
+checkBit(n,k)
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 35 
+File path: C:\Users\sudhe\Documents\Placements\BitManipulation\countSetBits.py
+
+
+# count number of set bits in an number
+
+def countSetBits(n):
+	cnt=0
+	while(n>0):
+		cnt+=n&1
+		n>>=1
+	return cnt 
+n=int(input())
+print(countSetBits(n))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 36 
+File path: C:\Users\sudhe\Documents\Placements\CombineFiles.py
+
+
+import os
+
+path = "C:\\Users\\sudhe\\Documents\\Placements"
+
+cnt = 1
+def copyFile(path):
+	if(os.path.isfile(path)):
+		if(path.endswith('.py') or path.endswith('.PY')):
+			global cnt
+			with open(path) as readFile, open('InterviewQuestions.txt','a') as writeFile:
+				writeFile.write("Program Number : " + str(cnt) + " \nFile path: " + path + '\n\n\n')
+				for line in readFile:
+					writeFile.write(line)
+				
+				cnt += 1
+				writeFile.write("\n\n\n" + "$" * 30 + " " * 10 + "$" * 30 + "\n\n\n")
+
+		return
+
+	dirs = os.listdir(path)
+	# dirs = sorted(dirs, key = os.path.getmtime)
+	# dirs = dirs[::-1]
+	for file in dirs:
+		nextPath = os.path.join(path, file)
+		copyFile(nextPath)
+
+
+copyFile(path)
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 37 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\EleIsIndexNonRepeted.py
+
+
+'''
+
+	Given an array of non repeted integers find the position of an array where arr[i]=i
+'''
+def findPosition(arr,low,high):
+	if(low<=high):
+		mid=(low+high)//2
+		if(arr[mid]==mid):
+			return mid
+		if(arr[mid]>mid):
+			return findPosition(arr,low,mid-1)
+		return findPosition(arr,mid+1,high)
+	return -1
+arr=list(map(int,input().split()))
+print(findPosition(arr,0,len(arr)-1))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 38 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\ElementIsIndex.py
+
+
+'''
+
+	Given an array of integers find the position of an array where arr[i]=i
+'''
+def findPosition(arr,low,high):
+	if(low<=high):
+		mid=(low+high)//2
+		if(arr[mid]==mid):
+			return mid
+		if(arr[mid]<mid):
+			return findPosition(arr,low,mid-1)
+		return findPosition(arr,mid+1,high)
+	return -1
+arr=list(map(int,input().split()))
+print(findPosition(arr,0,len(arr)-1))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 39 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\EndingOfIncreasingSequence.py
+
+
+'''
+	
+	Given an array of integers containging increasing sequence and after that
+	increasing sequence there is decreaasing seaqunce find the element where increasing sequence over.
+	
+	Time complexity :O(log n)
+	Space complexity :O(1)
+'''
+
+def binarySearch(arr,low,high):
+	if(low<=high):
+		mid=(low+high)//2
+		if((mid==0 and arr[mid+1]<arr[mid]) or (arr[mid-1]<arr[mid] and arr[mid]>arr[mid+1]) or (low==high and arr[mid]>arr[mid-1])):
+			return mid  
+		elif(arr[mid-1]<arr[mid]):
+			return binarySearch(arr,mid+1,high)
+		else:
+			return binarySearch(arr,low,mid-1)
+
+def getMaximumElement(arr,start,end):
+	if(start==end):
+		return arr[start]
+	if(start+1==end and arr[start]>=arr[end]):
+		return arr[start]
+	if(start+1==end and arr[start]<arr[end]):
+		return arr[end]
+	mid=(start+end)//2
+	if(arr[mid]<arr[mid-1] and arr[mid]>arr[mid+1]):
+		return getMaximumElement(arr,start,mid-1)
+	return getMaximumElement(arr,mid+1,end)
+arr=list(map(int,input().split()))
+# print(binarySearch(arr,0,len(arr)-1))
+print(getMaximumElement(arr,0,len(arr)-1))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 40 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\FindMissingElement.py
+
+
+'''
+	Given an array of sorted integers find the missing element in the array.
+'''
+def findMissingEle(arr):
+	n=len(arr)
+	d=(arr[n-1]-arr[0])/n
+	low,high=1,n
+	while(low<=high):
+		mid=(low+high)//2
+		req=arr[0]+(mid-1)*d 
+		if(arr[mid-1]==req):
+			low=mid+1
+		else:
+			high=mid-1
+	return arr[0]+(low-1)*d 
+arr=list(map(int,input().split()))
+print(findMissingEle(arr))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 41 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\GetFirstOne.py
+
+
+'''
+	Given an array containing only 0's and 1's find the index of first occurance of 1 in the given array.
+	
+	Time complexity : O(log n)
+
+'''
+arr=list(map(int,input().split()))
+
+
+def getFirstOne(arr,low,high):
+	if(low<=high):
+		mid=(low+high)//2
+		if((mid==0 or arr[mid-1]==0) and arr[mid]==1):
+			return mid
+		if(arr[mid]==0):
+			return getFirstOne(arr,mid+1,high)
+		return getFirstOne(arr,low,mid-1)
+	return -1
+print(getFirstOne(arr,0,len(arr)-1))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 42 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\InversionCount.py
+
+
+# invertion count
+def merge(arr,temp,l,r,middle):
+	lindex=l
+	rindex=middle
+	inversionCount=0
+	while(lindex<=middle-1 and rindex<=r):
+		if(arr[lindex]<arr[rindex]):
+			temp.append(arr[lindex])
+			lindex+=1
+		else:
+			temp.append(arr[rindex])
+			rindex+=1
+			inversionCount+=(middle-lindex)
+	while(lindex<=middle-1):
+		temp.append(arr[lindex])
+	while(rindex<=r):
+		temp.append(arr[rindex])
+	for i in range(l,r+1):
+		arr[i]=temp[i]
+	return inversionCount
+def mergeSort(arr,temp,l,r):
+	inversionCount=0
+	if(l<r):
+		mid=(l+r)//2
+		inversionCount+=mergeSort(arr,temp,l,mid-1)
+		inversionCount+=mergeSort(arr,temp,mid+1,r)
+		inversionCount+=merge(arr,temp,l,r,mid+1)
+	return inversionCount
+arr=list(map(int,input().split()))
+temp=arr
+print(mergeSort(arr,temp,0,len(arr)-1))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 43 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\InversionCountUsingHash.py
+
+
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 44 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\MajorityEle.py
+
+
+'''
+	Devide and quoncer
+
+	given an array find an element that is occur more than half.
+
+	Time complexity : O(log n)
+	Space complexity : O(1)
+'''
+
+def binarySearch(nums,l,r,target):
+	while(l<=r):
+		mid=(l+r)//2
+		if(nums[mid]==target):
+			return mid
+		elif(nums[mid]>target):
+			r=mid-1
+		else:
+			l=mid+1
+	return -1
+
+def maxEle(nums):
+	res=len(nums)//2
+	temp=res
+	while(res!=0 and nums[res-1]==nums[res]):
+		res=binarySearch(nums,0,res-1,nums[res])
+		temp=res
+	lindex=temp
+	rindex=lindex+(len(nums)//2)
+	if(rindex>=len(nums)):
+		print("Majority element doesn't exist")
+	elif(nums[rindex]==nums[lindex]):
+		print("Mejority element is ",nums[lindex])
+	else:
+		print("Majority element doesn't exist")
+
+maxEle([1,2,3,4,5,5])
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 45 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\NutsAndBoalts.py
+
+
+# Nuts and Bolts problem
+
+
+def matchNutsAndBoalts(nuts,bolts,start,end):
+	if(start<end):
+		pivot=partition(nuts,start,end,bolts[end])
+		partition(bolts,start,end,nuts[pivot])
+		matchNutsAndBoalts(nuts,bolts,start,pivot-1)
+		matchNutsAndBoalts(nuts,bolts,pivot+1,end)
+	return nuts,bolts
+def partition(arr,start,end,pivot):
+	i=j=start
+	while(j<end):
+		if(arr[j]<pivot):
+			arr[i],arr[j]=arr[j],arr[i]
+			i+=1
+		if(arr[j]==pivot):
+			arr[j],arr[end]=arr[end],arr[j]
+			j-=1
+		j+=1
+	arr[i],arr[end]=arr[end],arr[i]
+	return i
+print(matchNutsAndBoalts([5,4,0,9,2],[9,4,2,0,5],0,4))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 46 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\PowFunction.py
+
+
+# implement pow() function
+'''
+
+	Time Complexity : O(log n)
+	Space Complexity : O(1)
+
+'''
+def pow(x,n):
+	if(n==1):
+		return x
+	else:
+		t=pow(x,n//2)
+		if(n%2==0):
+			return t*t
+		return t*t*x
+x=int(input())
+n=int(input())
+print(pow(x,n))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 47 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\SearchIn2Darray.py
+
+
+'''
+	
+	Given an 2D array it is sorted in both row and column wise find the position of an element x.
+'''
+
+def searchMatrix(arr,target,n):
+	i,j=0,n-1
+	while(i<=j):
+		if(arr[i][j]==target):
+			print("element found at ",i,"th row",j,"th column")
+			return
+		if(arr[i][j]<target):
+			i+=1
+		else:
+			j-=1
+	print("element not found")
+arr=[[1,2,3,4,5],[2,3,4,5,6],[3,4,5,6,7],[4,5,6,7,8],[5,6,7,8,9]]
+searchMatrix(arr,8,len(arr))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 48 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\SearchInRotatedArray.py
+
+
+'''
+	
+	Given a rottated array implement the search process in that array.
+
+	Time complexity :O(log n)
+	Space complexity :O(1)
+
+'''
+def rottatedSearch(arr,target,l,r):
+	if(l<=r):
+		mid=(l+r)//2
+		if(arr[mid]==target):
+			return mid
+		if(arr[l]<arr[mid]):
+			if(target<arr[mid] and target>arr[l]):
+				return rottatedSearch(arr,target,l,mid-1)
+			return rottatedSearch(arr,target,mid+1,r)
+		else:
+			if(target<arr[r] and target>arr[mid]):
+				return rottatedSearch(arr,target,mid+1,r)
+			return rottatedSearch(arr,target,l,mid-1)
+	return -1
+
+def searchInRottatedArray(arr,key,l,r):
+	if(l>r):
+		return -1
+	mid=(l+r)//2
+	if(arr[mid]==key):
+		return mid
+	if(arr[l]<=arr[mid]):
+		if(key>=arr[l] and key<arr[mid]):
+			return searchInRottatedArray(arr,key,l,mid-1)
+		else:
+			return searchInRottatedArray(arr,key,mid+1,r)
+	if(key>=arr[mid] and key<arr[r]):
+		return searchInRottatedArray(arr,key,mid+1,r)
+	return searchInRottatedArray(arr,key,l,mid-1)
+arr=list(map(int,input().split()))
+target=int(input())
+print(rottatedSearch(arr,target,0,len(arr)-1))
+print(searchInRottatedArray(arr,target,0,len(arr)-1))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 49 
+File path: C:\Users\sudhe\Documents\Placements\DivideAndConquer\ShuffleArray.py
+
+
+'''
+	
+	Given an array of integers shuffle the array like
+
+	[a1,a2,a3,a4,b1,b2,b3,b4] to [a1,b1,a2,b2,a3,b3,a4,b4]
+
+'''
+
+
+def shuffleArr(arr,low,high):
+	if((high-low)==1):
+		return
+	mid=(low+high)//2
+	temp=mid+1
+	leftMid=(low+mid)//2
+	for i in range(leftMid+1,mid+1):
+		arr[i],arr[temp]=arr[temp],arr[i]
+		temp+=1
+	shuffleArr(arr,low,mid)
+	shuffleArr(arr,mid+1,high)
+arr=list(map(int,input().split()))
+shuffleArr(arr,0,len(arr)-1)
+print(arr)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 50 
+File path: C:\Users\sudhe\Documents\Placements\DP\CoinChange.py
+
+
+'''
+	
+	Given a set of coins find the number of possible ways to sum to the given target.
+
+	Time complexity : O(n*m)
+
+	where n is the amount required and m is the coins given.
+
+	Space complexity :O(n*m)
+
+'''
+
+def coinChange(coins,amt):
+	print(coins)
+	n=len(coins)
+	DP=[[0 for i in range(amt+1)] for j in range(n+1)]
+	for i in range(amt+1):
+		DP[0][i]=0
+	for j in range(n+1):
+		DP[j][0]=1
+	for i in range(1,n+1):
+		for j in range(1,amt+1):
+			if(coins[i-1]<=j):
+				DP[i][j]=DP[i-1][j]+DP[i][j-coins[i-1]]
+			else:
+				DP[i][j]=DP[i-1][j]
+	print(DP)
+	return DP[n][amt]
+coins=list(map(int,input().split()))
+amt=int(input())
+print(coinChange(coins,amt))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 51 
+File path: C:\Users\sudhe\Documents\Placements\DP\CountPossibleSubsetSums.py
+
+
+'''
+
+	Given an array of integers count number of possible subsets whose sum to x.
+'''
+
+def countSubsetSum(arr,x,n):
+	DP=[[0 for i in range(x+1)] for j in range(n+1)]
+	for i in range(n+1):
+		DP[i][0]=1
+	for i in range(1,x+1):
+		DP[0][i]=0
+	for i in range(1,n+1):
+		for j in range(1,x+1):
+			if(j<arr[i-1]):
+				DP[i][j]=DP[i-1][j]
+			else:
+				DP[i][j]=DP[i-1][j]+DP[i-1][j-arr[i-1]]
+	return DP[n][x]
+arr=list(map(int,input().split()))
+x=int(input())
+print("Total number of possible combination of subsets is",countSubsetSum(arr,x,len(arr)))
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 52 
+File path: C:\Users\sudhe\Documents\Placements\DP\CountSubSequence.py
+
+
+'''
+	
+	Count the number of sub sequences occur in a given string.
+
+	Ex: m='abbab' and n='ab'
+
+	resultent count is 4
+'''
+def countSubSequence(s1,s2):
+	m=len(s1)
+	n=len(s2)
+	DP=[[0 for i in range(n+1)] for i in range(m+1)]
+	for i in range(n+1):
+		DP[0][i]=0
+	for i in range(m+1):
+		DP[i][0]=1
+	for i in range(1,m+1):
+		for j in range(1,n+1):
+			if(s1[i-1]==s2[j-1]):
+				DP[i][j]=DP[i-1][j-1]+DP[i-1][j]
+			else:
+				DP[i][j]=DP[i-1][j]
+	return DP[m][n]
+m=input()
+n=input()
+print("total occurances of string 2 in string 1 is",countSubSequence(m,n))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 53 
+File path: C:\Users\sudhe\Documents\Placements\DP\FindSubStr.py
+
+
+'''
+	Given a string and a pattren find the minimum length of the pattren substring in the given string.
+
+'''
+def findSubStr(string, pat):
+	l1 = len(string)
+	l2 = len(pat)
+	h_str = dict()
+	h_pat = dict()
+	for i in pat:
+		if(h_pat.get(i)):
+			h_pat[i] += 1
+		else:
+			h_pat[i] = 1
+	cnt = start = 0
+	minLen = l1
+	startInd = -1
+	for i in range(l1):
+		if(h_str.get(i)):
+			h_str[string[i]] += 1
+		else:
+			h_str[string[i]] = 1
+		if(h_pat[string[i]] != 0 and h_str[string[i]] <= h_pat[string[i]]):
+			cnt += 1
+		if(cnt == l2):
+			while(h_str[string[start]] > h_pat[string[start]] or h_pat[string[start]] == 0):
+				if(h_str[string[start]] > h_pat[string[start]]):
+					h_str[string[start]] -= 1
+					start += 1
+			windowLen = j - start + 1
+			if(minLen > windowLen):
+				minLen = windowLen
+				startInd = start
+	if(startInd == -1):
+		print("No such window found")
+	else:
+		i = startInd
+		while(minLen != 0):
+			print(string[i], end = "")
+			i += 1
+			minLen -= 1
+
+string = input()
+pat = input()
+findSubStr(string, pat)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 54 
+File path: C:\Users\sudhe\Documents\Placements\DP\KthUglyNumber.py
+
+
+'''
+	
+	Find the k th ugly number in natural numbers set
+	a number is called an ugly number only when it can be expressed as a product of 2,3 and 5
+
+'''
+def kthUglyNum(n):
+	ugly=[1]
+	index=1
+	i2,i3,i5=0,0,0
+	nextMultipleOf2,nextMultipleOf3,nextMultipleOf5=2,3,5
+	while(index<n):
+		nextUglyNum=min(nextMultipleOf2,nextMultipleOf3,nextMultipleOf5)
+		ugly.append(nextUglyNum)
+		index+=1
+		if(nextUglyNum==nextMultipleOf2):
+			i2+=1
+			nextMultipleOf2=ugly[i2]*2
+		if(nextUglyNum==nextMultipleOf3):
+			i3+=1
+			nextMultipleOf3=ugly[i3]*3
+		if(nextUglyNum==nextMultipleOf5):
+			i5+=1
+			nextMultipleOf5=ugly[i5]*5
+	return nextUglyNum
+n=int(input())
+print(kthUglyNum(n))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 55 
+File path: C:\Users\sudhe\Documents\Placements\DP\LongestDecreasingSubSequnce.py
+
+
+'''
+	Given an array find the length of longest decreasing sub sequence.
+
+	2 10 11 5 3 4 12 1
+
+	 the longest sub sequence is ----> 10 ->5->3->1 and 11->5->3->1
+
+	 so the output is 4
+
+	 longest decreasing sequence is the reverse implementation of longest increase sequence.
+
+	 Time complexity O(n**2)
+	 Space complexity O(n)
+'''
+
+def lds(arr):
+	n=len(arr)
+	res=[1 for i in range(n)]
+	for i in range(n-2,-1,-1):
+		j=i+1
+		while(j<n):
+			if(arr[j]<arr[i]):
+				res[i]=max(res[j]+1,res[i])
+			j+=1
+	print(res)
+	return max(res)
+arr=list(map(int,input().split()))
+print(lds(arr))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 56 
+File path: C:\Users\sudhe\Documents\Placements\DP\LongestIncreasingSubSequnce.py
+
+
+'''
+	Given an array find the length of longest increasing sub sequence.
+
+	2 3 1 5 12 10 11
+
+	 the longest sub sequence is ----> 2->3->5->10>11
+
+	 so the output is 5
+
+	 Time complexity O(n**2)
+	 Space complexity O(n)
+'''
+
+def lis(arr):
+	n=len(arr)
+	res=[1 for i in range(n)]
+	for i in range(1,n):
+		j=i-1
+		while(j>=0):
+			if(arr[j]<arr[i]):
+				res[i]=max(res[j]+1,res[i])
+			j-=1
+	return max(res)
+arr=list(map(int,input().split()))
+print(lis(arr))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 57 
+File path: C:\Users\sudhe\Documents\Placements\DP\LongestPalindromicSubsequence.py
+
+
+'''
+	
+	Given a string find the length of the longest palindromic subsequence.
+
+	Ex : revaar
+
+	answer is 4 because raar is a subsequence of length 4.
+	Time complexity : O(n**2)
+	Space complexity :O(n**2)
+'''
+
+def lps(s):
+	l=len(s)
+	DP=[[0 for i in range(l)] for i in range(l)]
+	for i in range(l):
+		DP[i][i]=1
+	for ls in range(2,l+1):
+		for i in range(l-ls+1):
+			j=i+ls-1
+			if(s[i]==s[j] and l==2):
+				DP[i][j]=2
+			elif(s[i]==s[j]):
+				DP[i][j]=2+DP[i+1][j-1]
+			else:
+				DP[i][j]=max(DP[i][j-1],DP[i+1][j])
+	return DP[0][l-1]
+s=input()
+print(lps(s))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 58 
+File path: C:\Users\sudhe\Documents\Placements\DP\LongestSubSequence.py
+
+
+'''
+	
+	Given an array of integers find the longest sub sequence in the list
+
+	10 4 3 11 13 5 6 12 7
+
+	in the above swquence
+	maximum sub sequnce is 3 4 5 6 7
+	hence the output is 5.
+	
+	Time complexity O(n)
+	Space complexity O(n)
+
+'''
+def logestSubSequene(arr):
+	hmap=dict()
+	res=0
+	for i in arr:
+		hmap[i]=True
+	for i in arr:
+		if(hmap[i]):
+			cnt=1
+			flag=True
+			ele=i-1
+			while(hmap.get(ele)!=None):
+				cnt+=1
+				hmap[ele]=False
+				ele-=1
+			ele=i+1
+			while(hmap.get(ele)!=None):
+				cnt+=1
+				hmap[ele]=False
+				ele+=1
+			if(cnt>res):
+				res=cnt
+	return res
+arr=list(map(int,input().split()))
+print(logestSubSequene(arr))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 59 
+File path: C:\Users\sudhe\Documents\Placements\DP\MaximumSumSubArray.py
+
+
+'''
+	Dynamic programming
+
+	Given an array of integers find the maximum subarray sum.
+
+'''
+
+def maxSumSubArray(arr):
+	msf=cm=0
+	for i in arr:
+		cm+=i
+		if(cm<0):
+			cm=0
+		if(cm>msf):
+			msf=cm
+	return msf
+arr=list(map(int,input().split()))
+print(maxSumSubArray(arr))
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 60 
+File path: C:\Users\sudhe\Documents\Placements\DP\MaxSumIncreasingSequnce.py
+
+
+'''
+	Given an array of integers find the maximum sum of increasing sequence.
+
+	20 3 1 15 16 2 12 13
+
+	output is : 3+15+16 = 34
+
+	Time complexity O(n**2)
+	Space Complexity O(n)
+'''
+
+def maxSumIncreasingSubSequnce(arr):
+	sumSubSequence=[arr[0]]
+	for i in range(1,len(arr)):
+		maxSum=arr[i]
+		j=i-1
+		while(j>=0):
+			if(arr[j]<arr[i]):
+				temp=maxSum+arr[j]
+				if(temp>maxSum):
+					maxSum+=arr[j]
+			j-=1
+		sumSubSequence.append(maxSum)
+	return max(sumSubSequence)
+
+def maxSum(arr):	#@Tutorial
+	n=len(arr)
+	sumSubSequence=[i for i in arr]
+	for i in range(1,n):
+		for j in range(i):
+			if(arr[j]<arr[i] and sumSubSequence[i]<sumSubSequence[j]+arr[i]):
+				sumSubSequence[i]=sumSubSequence[j]+arr[i]
+	return max(sumSubSequence)
+arr=list(map(int,input().split()))
+print(maxSumIncreasingSubSequnce(arr))
+print(maxSum(arr))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 61 
+File path: C:\Users\sudhe\Documents\Placements\DP\MinimumCostPath.py
+
+
+'''
+	
+	Given a cost matrinx of size m*n having a cost at each cell.
+	Find the minimum cost ot will take to reach cell (m-1,n-1) from top left
+	corner cell (0,0) if the only allowed directions to move from a cell 
+	are right, down, and diagnally down.
+
+	Time complexity : O(n**2)
+	Space complexity : O(n**2)
+
+'''
+
+def findMinCost(mat,i,j,m,n):
+	if(i==m-1 and j==n-1):
+		return mat[i][j]
+	if(i==m-1):
+		return mat[i][j]+mat[i][j+1]
+	if(j==n-1):
+		return mat[i][j]+mat[i+1][j]
+	return mat[i][j]+min(mat[i+1][j],mat[i+1][j+1],mat[i][j+1])
+def solvePath(mat,m,n):
+	for i in range(m-1,-1,-1):
+		for j in range(n-1,-1,-1):
+			mat[i][j]=findMinCost(mat,i,j,m,n)
+	return mat[0][0]
+mat=[[10,3,4],[5,6,17],[13,4,11]]
+m=len(mat)
+n=len(mat[0])
+print(solvePath(mat,m,n))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 62 
+File path: C:\Users\sudhe\Documents\Placements\DP\NoConsicutive0s.py
+
+
+'''
+
+	Given a number find the count of numbers which doesn't have two consicutive zero's.
+'''
+def possibleNumbers(n):
+	if(n==0):
+		return 0
+	elif(n==1):
+		return 2
+	elif(n==2):
+		return 3
+	else:
+		fib=[0,2,3]
+		for i in range(3,n+1):
+			fib.append(fib[i-1]+fib[i-2])
+		return fib[-1]
+n=int(input())
+print(possibleNumbers(n))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 63 
+File path: C:\Users\sudhe\Documents\Placements\DP\NonOverlappingSubSequence.py
+
+
+'''
+	
+	Longest non overlapping repeating sub sequence.
+
+	Time complexity : O(n**2)
+	Space complexity : O(n**2)
+
+'''
+def longestNORSub(s):
+	n=len(s)
+	DP=[[None for i in range(n)] for j in range(n)]
+	mx=0
+	for i in range(n):
+		for j in range(n):
+			if(i==j):
+				DP[i][j]=0
+	for i in range(n):
+		for j in range(i+1,n):
+			if(s[i]==s[j]):
+				if(i-1<0 or j-1<0):
+					DP[i][j]=1
+				else:
+					if(1+DP[i-1][j-1]>(j-i)):
+						DP[i][j]=0
+					else:
+						DP[i][j]=1+DP[i-1][j-1]
+			else:
+				DP[i][j]=0
+			if(DP[i][j]>mx):
+				mx=DP[i][j]
+	return mx
+s=input()
+print(longestNORSub(s))
+	
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 64 
+File path: C:\Users\sudhe\Documents\Placements\DP\NStairsProblem.py
+
+
+'''
+	N stairs problem
+'''
+def nStairs(n):
+	combs=[0,1,2]
+	if(n==1):
+		return 1
+	elif(n==2):
+		return 2
+	else:
+		for i in range(3,n+1):
+			combs.append(combs[i-1]+combs[i-2])
+	return combs[n-1]
+n=int(input())
+print(nStairs(n))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 65 
+File path: C:\Users\sudhe\Documents\Placements\DP\PartitionProblem.py
+
+
+'''
+	Given an array of integers check whether is it possible to divide the elements into two groups such that both the groups contain equal sum.
+
+'''
+def isSubSetSum(arr,x,n):
+	DP=[[False for i in range(x+1)] for i in range(n+1)]
+	for i in range(n+1):
+		DP[i][0]=True
+	for i in range(1,x+1):
+		DP[0][i]=False
+	for i in range(1,n+1):
+		for j in range(1,x+1):
+			if(j<arr[i-1]):
+				DP[i][j]=DP[i-1][j]
+			else:
+				DP[i][j]=DP[i-1][j] or DP[i-1][j-arr[i-1]]
+	return DP[n][x]
+arr=list(map(int,input().split()))
+total=sum(arr)
+if(total%2==1):
+	print("partetion is not possible")
+else:
+	if(isSubSetSum(arr,total//2,len(arr))):
+		print("partetion is possible")
+	else:
+		print("partetion is not possible")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 66 
+File path: C:\Users\sudhe\Documents\Placements\DP\PerfectHill.py
+
+
+'''
+	Given an array find the length of perfect hill.
+
+	10 15 16 9 4 3 11 1												16
+																   /  \
+																  15   9
+																 /		\
+															    10		 4
+	 the longest perfect hill is ----> 			
+
+	 so the output is 4
+
+	 longest decreasing sequence is the reverse implementation of longest increase sequence.
+
+	 Time complexity O(n**2)
+	 Space complexity O(n)
+'''
+def lis(arr):
+	n=len(arr)
+	res=[1 for i in range(n)]
+	for i in range(1,n):
+		j=i-1
+		while(j>=0):
+			if(arr[j]<arr[i]):
+				res[i]=max(res[j]+1,res[i])
+			j-=1
+	return res
+
+def lds(arr):
+	n=len(arr)
+	res=[1 for i in range(n)]
+	for i in range(n-2,-1,-1):
+		j=i+1
+		while(j<n):
+			if(arr[j]<arr[i]):
+				res[i]=max(res[j]+1,res[i])
+			j+=1
+	return res
+
+arr=list(map(int,input().split()))
+inc=lis(arr)
+dec=lds(arr)
+mxHight=0
+for i in range(len(arr)):
+	temp=(min(inc[i],dec[i])-1)*2-1
+	mxHight=max(temp,mxHight)
+print("maximum height of the perfect hill is ",mxHight)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 67 
+File path: C:\Users\sudhe\Documents\Placements\DP\SubsetSum.py
+
+
+'''
+	Given an array of integers and an required sum check whether it is possible to obtain the required sum as a subset in the given list
+'''
+
+def isSubsetSum(arr,x,n):
+	if(x==0):
+		return True
+	elif(n==0):
+		return False
+	else:
+		if(arr[n-1]>x):
+			return isSubsetSum(arr,x,n-1)
+		else:
+			return isSubsetSum(arr,x,n-1) or isSubsetSum(arr,x-arr[n-1],n-1)
+
+def isSubsetSumDP(arr,x,n):
+	DP=[[False for i in range(x+1)] for j in range(n+1)]
+	for i in range(n+1):
+		DP[i][0]=True
+	for i in range(1,x+1):
+		DP[0][i]=False
+	for i in range(1,n+1):
+		for j in range(1,x+1):
+			if(arr[i-1]>j):
+				DP[i][j]=DP[i-1][j]
+			else:
+				DP[i][j]=DP[i-1][j] or DP[i-1][j-arr[i-1]]
+	print(DP)
+	return DP[n][x]
+arr=list(map(int,input().split()))
+x=int(input())
+print(isSubsetSum(arr,x,len(arr)))
+print(isSubsetSumDP(arr,x,len(arr)))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 68 
+File path: C:\Users\sudhe\Documents\Placements\DP\SumOfNDigits.py
+
+
+'''
+	given a number n find the sum of digits from 1 to n
+
+	Time complexity : O(log n)
+
+'''
+import math
+def sumOfDigits(n):
+	if(n<10):
+		return (n*(n+1))//2
+	b=int(math.log10(n))
+	arr=[0]*(b+1)
+	arr[0]=0
+	arr[1]=45
+	for i in range(2,b+1):
+		arr[i]=arr[i-1]*10+45*(int)(math.ceil(math.pow(10,i-1)))
+	p=(int)(math.ceil(math.pow(10,b)))
+	msd=n//p
+	return (msd*arr[b]+((msd*(msd-1))//2)*p)+(msd*(1+n%p)+sumOfDigits(n%p))
+print(sumOfDigits(328))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 69 
+File path: C:\Users\sudhe\Documents\Placements\DP\Tiles.py
+
+
+'''
+	Given a 2*n board and tiles of size 2*1 count the
+	number of ways to fill the given board using 2*1 files.
+
+	f(n)=f(n-1)+f(n-2)
+
+	Time complexity :O(n)
+	Space complexity :O(n)
+
+'''
+
+def noOfWays(n):
+	DP=[0,1]
+	if(n==0):
+		return 0
+	elif(n==1):
+		return 1
+	else:
+		i=2
+		while(i<=n):
+			DP.append(DP[i-1]+DP[i-2])
+			i+=1
+		return DP[n]
+n=int(input())
+print(noOfWays(n))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 70 
+File path: C:\Users\sudhe\Documents\Placements\Graphs\BipartileGraph.py
+
+
+'''
+	Given a graph check whether the graph is bipartite or not.
+
+	a graph is bipartite if the vertices are devided into two sets or while graph coloring if the graph is collered with
+	two colors then the graph is said to be bipartite graph.
+
+	Time complexity : O(V*V)
+	space complexity : O(V)		# due to queue and color vector
+
+	GFG : https://www.geeksforgeeks.org/bipartite-graph/
+'''
+
+class Graph:
+	def __init__(self, v, g):
+		self.V = v
+		self.graph = g
+
+	def isBipartite(self, src):
+		color = [-1]*self.V 
+		queue = [src]
+		while(queue):
+			u = queue.pop()
+			for v in range(self.V):
+				if(self.graph[u][v] == 1 and color[v] == -1):
+					color[v] = 1-color[u]
+					queue.append(v)
+				elif(self.graph[u][v] == 1 and color[u] == color[v]):
+					return False
+
+		return True
+
+# Driver program to test above function
+graph = [[0, 1, 0, 1],
+            [1, 0, 1, 0],
+            [0, 1, 0, 1],
+            [1, 0, 1, 0]
+            ]
+g = Graph(4, graph)             
+
+print ("Yes" if g.isBipartite(0) else "No")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 71 
+File path: C:\Users\sudhe\Documents\Placements\Graphs\CountIslands.py
+
+
+'''
+	Given a graph in the form of a matrix count the number of islands in the given matrix.
+
+	Time complexity : O(row * col)
+	Space complexity : O(row * col)
+
+	GFG : https://www.geeksforgeeks.org/find-number-of-islands/
+
+'''
+
+class Graph:
+	def __init__(self, r, c, g):
+		self.row = r
+		self.col = c
+		self.graph = g
+
+	def isSafe(self, visited, i, j):
+		return (i>=0 and i<self.row and j>=0 and j<self.col and not visited[i][j] and self.graph[i][j])
+
+	def DFS(self, visited, i, j):
+		visited[i][j] = True
+		rowNbr = [-1, -1, -1,  0, 0,  1, 1, 1]
+		colNbr = [-1,  0,  1, -1, 1, -1, 0, 1]
+		for k in range(8):
+			if(self.isSafe(visited, i+rowNbr[k], j+colNbr[k])):
+				self.DFS(visited, i+rowNbr[k], j+colNbr[k])
+
+	def countIslands(self):
+		count = 0
+		visited = [[False for i in range(self.col)] for i in range(self.row)]
+		for i in range(self.row):
+			for j in range(self.col):
+				if(visited[i][j] == False and self.graph[i][j] == 1):
+					self.DFS(visited, i, j)
+					count += 1
+		return count
+
+ 
+graph = [[1, 1, 0, 0, 0],
+        [0, 1, 0, 0, 1],
+        [1, 0, 0, 1, 1],
+        [0, 0, 0, 0, 0],
+        [1, 0, 1, 0, 1]]
+ 
+ 
+row = len(graph)
+col = len(graph[0])
+ 
+g = Graph(row, col, graph)
+ 
+print ("Number of islands is:")
+print (g.countIslands())
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 72 
+File path: C:\Users\sudhe\Documents\Placements\Graphs\CountIslandsWithoutVisitedMatrix.py
+
+
+'''
+	Given a graph in the form of a matrix count the number of islands in the given matrix.
+
+	Time complexity : O(row * col)
+	Space complexity : O(row * col)
+
+	GFG : https://www.geeksforgeeks.org/find-number-of-islands/
+
+'''
+
+class Graph:
+	def __init__(self, r, c, g):
+		self.row = r
+		self.col = c
+		self.graph = g
+
+
+	def DFS(self, i, j):
+		if(i<0 or i>=self.row or j<0 or j>=self.col or self.graph[i][j] != 1):
+			return
+
+		self.graph[i][j] = -1
+		rowNbr = [-1, -1, -1,  0, 0,  1, 1, 1]
+		colNbr = [-1,  0,  1, -1, 1, -1, 0, 1]
+		for k in range(8):
+			self.DFS(i+rowNbr[k], j+colNbr[k])
+
+	def countIslands(self):
+		count = 0
+		for i in range(self.row):
+			for j in range(self.col):
+				if(self.graph[i][j] == 1):
+					self.DFS(i, j)
+					count += 1
+		return count
+
+graph = [[1, 1, 0, 0, 0],
+        [0, 1, 0, 0, 1],
+        [1, 0, 0, 1, 1],
+        [0, 0, 0, 0, 0],
+        [1, 0, 1, 0, 1]]
+ 
+ 
+row = len(graph)
+col = len(graph[0])
+ 
+g = Graph(row, col, graph)
+ 
+print ("Number of islands is:")
+print (g.countIslands())
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 73 
+File path: C:\Users\sudhe\Documents\Placements\Graphs\DetectCycleInUndirectedGraph.py
+
+
+# Python Program to detect cycle in an undirected graph
+from collections import defaultdict
+
+# This class represents a undirected
+# graph using adjacency list representation
+
+
+class Graph:
+
+	def __init__(self, vertices):
+
+		# No. of vertices
+		self.V = vertices # No. of vertices
+
+		# Default dictionary to store graph
+		self.graph = defaultdict(list)
+
+	# Function to add an edge to graph
+	def addEdge(self, v, w):
+
+		# Add w to v_s list
+		self.graph[v].append(w)
+
+		# Add v to w_s list
+		self.graph[w].append(v)
+
+	# A recursive function that uses
+	# visited[] and parent to detect
+	# cycle in subgraph reachable from vertex v.
+	def isCyclicUtil(self, v, visited, parent):
+
+		# Mark the current node as visited
+		visited[v] = True
+
+		# Recur for all the vertices
+		# adjacent to this vertex
+		for i in self.graph[v]:
+
+			# If the node is not
+			# visited then recurse on it
+			if visited[i] == False:
+				if(self.isCyclicUtil(i, visited, v)):
+					return True
+			# If an adjacent vertex is
+			# visited and not parent
+			# of current vertex,
+			# then there is a cycle
+			elif parent != i:
+				return True
+
+		return False
+
+	# Returns true if the graph
+	# contains a cycle, else false.
+
+	def isCyclic(self):
+
+		# Mark all the vertices
+		# as not visited
+		visited = [False]*(self.V)
+
+		# Call the recursive helper
+		# function to detect cycle in different
+		# DFS trees
+		for i in range(self.V):
+
+			# Don't recur for u if it
+			# is already visited
+			if visited[i] == False:
+				if(self.isCyclicUtil
+				(i, visited, -1)) == True:
+					return True
+
+		return False
+
+
+# Create a graph given in the above diagram
+g = Graph(5)
+g.addEdge(1, 0)
+g.addEdge(1, 2)
+g.addEdge(2, 0)
+g.addEdge(0, 3)
+g.addEdge(3, 4)
+
+if g.isCyclic():
+	print("Graph contains cycle")
+else:
+	print("Graph doesn't contain cycle ")
+g1 = Graph(3)
+g1.addEdge(0, 1)
+g1.addEdge(1, 2)
+
+
+if g1.isCyclic():
+	print("Graph contains cycle")
+else:
+	print("Graph doesn't contain cycle ")
+
+# This code is contributed by Neelam Yadav
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 74 
+File path: C:\Users\sudhe\Documents\Placements\Graphs\DetectCycleInUndirectedGraphUnionFind.py
+
+
+'''
+	Given a graph check wheather the graph contain cycle or not using disjoint set operations.
+
+	Union - combines two set elements
+	Find - find the parent of the node
+	
+	GFG : https://www.geeksforgeeks.org/union-find/
+'''
+
+from collections import defaultdict
+
+class Graph:
+	def __init__(self, vertices):
+		self.V = vertices
+		self.graph = defaultdict(list)
+
+	def addEdge(self, u, v):
+		self.graph[u].append(v)
+
+	def findParent(self, parent, i):
+		if(parent[i] == i):
+			return i
+		else:
+			return self.findParent(parent, parent[i])
+
+	def union(self, parent, x, y):
+		parent[x] = y
+
+	def isCyclic(self):
+		parent = [i for i in range(self.V)]
+
+		for i in self.graph:
+			for j in self.graph[i]:
+				x = self.findParent(parent, i)
+				y = self.findParent(parent, j)
+				if(x == y):
+					return True
+				else:
+					self.union(parent, x, y)
+		return False
+
+# Create a graph given in the above diagram
+g = Graph(3)
+g.addEdge(0, 1)
+g.addEdge(1, 2)
+g.addEdge(2, 0)
+ 
+if g.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle ")
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 75 
+File path: C:\Users\sudhe\Documents\Placements\Graphs\PathBetweenTwoNodes.py
+
+
+'''
+	Given two vertices from a graph check there exist a path between the given two vertices in the graph G.
+
+	Approch : 
+
+		-> by using BFS and DFS we can find the path between u and v.
+
+	Time complexity : O(V + E)
+	Space complexity : O(V)
+
+
+	GFG : https://www.geeksforgeeks.org/find-if-there-is-a-path-between-two-vertices-in-a-given-graph/
+
+	The same can be implemented using DFS also
+
+'''
+from collections import defaultdict
+
+class Graph:
+	def __init__(self, v):
+		self.V = v
+		self.graph = defaultdict(list)
+
+	def addEdge(self, u, v):
+		self.graph[u].append(v)
+
+	def isReachable(self, u, v):
+		visited = [False] * self.V
+		q = [u]
+		visited[u] = True
+		while(len(q) > 0):
+			temp = q.pop(0)
+			for child in self.graph[temp]:
+				if(visited[child] == False):
+					q.append(child)
+					visited[child] = True
+				if(child == v):
+					return True
+		return False
+
+# Create a graph given in the above diagram
+g = Graph(4)
+g.addEdge(0, 1)
+g.addEdge(0, 2)
+g.addEdge(1, 2)
+g.addEdge(2, 0)
+g.addEdge(2, 3)
+g.addEdge(3, 3)
+ 
+u =0; v = 3
+ 
+if g.isReachable(u, v):
+    print("There is a path from %d to %d" % (u,v))
+else :
+    print("There is no path from %d to %d" % (u,v))
+ 
+u = 3; v = 1
+if g.isReachable(u, v) :
+    print("There is a path from %d to %d" % (u,v))
+else :
+    print("There is no path from %d to %d" % (u,v))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 76 
+File path: C:\Users\sudhe\Documents\Placements\Graphs\SomeOtherProblems.py
+
+
+'''
+	Detect cycle in Directed Graph : https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+
+	Print all Jumping numbers less than n : https://www.geeksforgeeks.org/print-all-jumping-numbers-smaller-than-or-equal-to-a-given-value/
+
+	Shortest path in DAG : https://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/
+
+	Longest path in DAG : https://www.geeksforgeeks.org/find-longest-path-directed-acyclic-graph/
+
+	Find Articulation point in graphs: https://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/
+
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 77 
+File path: C:\Users\sudhe\Documents\Placements\Hashing\CheckDuplicatesAtDistanceK.py
+
+
+'''
+	Given an array check wheather the array contains duplicates at a distance k or not.
+
+	approch 1 : By using Naive approch
+		-> search k elements after the present element for every element
+		-> Time complexity : O(N*K) 
+		-> Space complexity : O(1)
+
+	approch 2 : By using Hash DS
+		-> maintain a hash table of size k
+		->  it reduces the time of search in k elements
+		->  Here hash map working like a sliding window
+		-> Time complexity : O(N)
+		-> Space complexity : O(K)
+
+'''
+arr = input().split()
+n = len(arr)
+k = int(input())
+hMap = dict()
+for i in range(1,k+1):
+	hMap[arr[i]] = 1
+
+flag = True
+
+for i in range(n-1):
+	if(hMap.get(arr[i])):
+		print("Repeated element occured in distance ", k)
+		flag = False
+		break
+	else:
+		del hMap[arr[i+1]]
+		if(i+k+1 < n):
+			hMap[arr[i+k+1]] = 1
+if(flag):
+	print("There is no repeated element in distance", k)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 78 
+File path: C:\Users\sudhe\Documents\Placements\Hashing\CountUniqeEle.py
+
+
+'''
+	Given an array of elements  count the distict elements in all windows of size k.
+
+	Time complexity : O(N)
+	Space complexity : O(N)
+'''
+
+arr = list(map(int, input().split()))
+n = len(arr)
+k = int(input())
+cnt = 0
+hMap = dict()
+res = []
+for i in range(k):
+	if(hMap.get(arr[i]) == None):
+		cnt += 1
+		hMap[arr[i]] = 1
+	else:
+		hMap[arr[i]] += 1
+		cnt -= 1
+res.append(cnt)
+for i in range(k, n):
+	if(hMap[arr[i-k]] == 1):
+		cnt -= 1
+	elif(hMap[arr[i-k]] == 2):
+		cnt += 1
+	hMap[arr[i-k]] -= 1
+	if(hMap.get(arr[i]) == None):
+		cnt += 1
+		hMap[arr[i]] = 1
+	elif(hMap.get(arr[i]) == 0):
+		cnt += 1
+		hMap[arr[i]] = 1
+	else:
+		hMap[arr[i]] += 1
+		cnt -= 1
+	res.append(cnt)
+print(res)
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 79 
+File path: C:\Users\sudhe\Documents\Placements\Hashing\DisjointSets.py
+
+
+'''
+	Given two sets of elements in the form of arrays of sizes of M and N check the given two sets are disjoint or not.
+
+	approch 1 : Brute force approch
+		-> check for each element from array 1 in array 2
+		-> Time complexity : O(M*N)
+		-> Space complexity : O(1)
+
+	approch 2 : Using Sorting and apply merge sort approch to find the commen element
+		-> Sort both arrays
+		-> apply merge sort approch 
+		-> Time complexity : O(M * log(M)) + O(N * log(N)) + O(M+N)
+		-> Space complexity : O(1)
+
+	approch 3 : Using Hash table
+		-> create a hash table for array1
+		-> Traverse array2 and check the hash table paralally for element
+		-> Time complexity : O(M) + O(N)
+		-> Space complexity : O(M)
+'''
+
+set1 = list(map(int, input().split()))
+set2 = list(map(int, input().split()))
+hMap = dict()
+for ele in set1:
+	if(hMap.get(ele) == None):
+		hMap[ele] = 1
+flag = True
+for ele in set2:
+	if(hMap.get(ele)):
+		print("These 2 sets are not disjoint")
+		flag = False
+		break
+if(flag):
+	print("These are Disjoint sets")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 80 
+File path: C:\Users\sudhe\Documents\Placements\Hashing\EleNotInArr.py
+
+
+'''
+	Given an array and a range print all the elements in the range that are not in the array.
+
+	approch 1 :
+		-> sort the given array and apply binary search to find starting number of the given range or the number less than or equal to the given starting range.
+		-> apply merge sort type comparision on the lists
+		-> Time complexity : O(n logn) + O(log n) + O(m+n)
+		-> Space complexity : O(1)
+
+	approch 2 :
+		-> Create a hash table for the given array
+		-> traverse the given range and check if the element in array or not if not print it.
+		-> Time complexity : O(n)
+		-> Space complexity : O(n)
+'''
+
+arr = list(map(int, input().split()))
+l, r = list(map(int, input().split()))
+hMap = dict()
+for ele in arr:
+	if(hMap.get(ele) == None):
+		hMap[ele] = 1
+for i in range(l, r+1):
+	if(hMap.get(i) == None):
+		print(i, end = " ")
+
+'''
+C:\Users\sudhe\Documents\Placements\Hashing>python EleNotInArr.py
+52 9 10 3 50 15 51 45 32
+48 53
+48 49 53
+
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 81 
+File path: C:\Users\sudhe\Documents\Placements\Hashing\GroupOccurances.py
+
+
+'''
+	Group all the occurances of elements order by their first occurances
+
+	approch :
+		-> create a hash table containing counts of elements in the array
+		-> create another array using the hash table
+		-> Time complexity : O(n)
+		-> Space complexity : O(n)
+'''
+arr = list(map(int, input().split()))
+hMap = dict()
+for ele in arr:
+	if(hMap.get(ele) == None):
+		hMap[ele] = 1
+	else:
+		hMap[ele] += 1
+
+newArr = []
+for ele in arr:
+	if(hMap.get(ele) != 0):
+		newArr += [ele]*hMap.get(ele)
+		hMap[ele] = 0
+print(newArr)
+'''
+	C:\Users\sudhe\Documents\Placements\Hashing>python GroupOccurances.py
+	3 2 4 5 2 5 3 4 3
+	[3, 3, 3, 2, 2, 4, 4, 5, 5]
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 82 
+File path: C:\Users\sudhe\Documents\Placements\Hashing\SubArrayWithSum0.py
+
+
+'''
+	Given an array count the subarray with sum 0
+
+	approch : 
+		-> Create a hash table with cumlative sum
+		-> if two numbers are repeated than their exist a subarray with sum 0
+		-> Time complexity : O(N)
+		-> Space complexity : O(N)
+'''
+arr = list(map(int, input().split()))
+s = 0
+hMap = dict()
+cnt = 0
+for ele in arr:
+	s += ele
+	if(hMap.get(s)):
+		cnt += hMap.get(s)
+		hMap[s] += 1
+	else:
+		hMap[s] = 1
+print(cnt)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 83 
+File path: C:\Users\sudhe\Documents\Placements\Heaps\BST_To_MaxHeap.py
+
+
+'''	
+		Given a BST convert it to the max heap
+		Reverse of an Inorder traversal of the BST is called the max heap
+
+		Print the reverse inorder traversal of the given BST
+		Time complexity : O(N)
+		Space complexity : O(1)
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 84 
+File path: C:\Users\sudhe\Documents\Placements\Heaps\CombineRopes.py
+
+
+'''
+	Given n ropes combining two smaller ropes requires low cost and combining 2 long ropes requires high cost.
+	Combine all the ropes with minimum cost.
+
+	Time complexity : O(N * log(N))
+
+'''
+
+def heapifyInsert(roaps, n, i):
+	parent = (i-1)//2
+	if(roaps[parent] > 0):
+		if(roaps[parent] > roaps[i]):
+			roaps[i], roaps[parent] = roaps[parent], roaps[i]
+			heapifyInsert(roaps, n, parent)
+
+def insertElement(roaps, key):
+	global n
+	n += 1
+	roaps.append(key)
+	if(len(roaps) > 1):
+		heapifyInsert(roaps, n, n-1)
+
+def buildMinHeap(roaps, k):
+	for i in range(k//2 - 1, -1, -1):
+		heapify(roaps, k, i)
+
+def heapify(roaps, n, i):
+	minm = i
+	left = 2*i + 1
+	right = 2*i + 2
+	if(left < n and roaps[left] < roaps[minm]):
+		minm = left
+	if(right < n and roaps[right] < roaps[minm]):
+		minm = right
+	if(minm != i):
+		roaps[minm], roaps[i] = roaps[i], roaps[minm]
+		heapify(roaps, n, minm)
+
+def getMin(roaps):
+	global n
+	minm = roaps.pop(0)
+	if(n != 1):
+		lastEle = roaps.pop()
+		if(len(roaps) > 0):
+			roaps.insert(0, lastEle)
+		else:
+			roaps.append(lastEle)
+		n -= 1
+		heapify(roaps, n, 0)
+	return minm
+
+def combineroapsWithMinmCost(roaps):
+	global n 
+	cost = 0
+	buildMinHeap(roaps, n)
+	while(len(roaps) > 1):
+		minm = getMin(roaps)
+		secMin = getMin(roaps)
+		cost += (minm + secMin)
+		insertElement(roaps, minm + secMin)
+	return cost
+
+roaps = list(map(int, input().split()))
+n = len(roaps)
+print(combineroapsWithMinmCost(roaps))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 85 
+File path: C:\Users\sudhe\Documents\Placements\Heaps\DeleteArbitaryEle.py
+
+
+'''
+	Given a min heap delete an arbitary element in the min heap.
+
+	Time complexity : O(N) -> to find the element in arr
+					  O(log N) -> deletion in min heap
+
+					  O(N) + O(log N) ~~ O(N)
+
+	Space complexity : O(1)
+'''
+def heapify(heap, n, index):
+	minEle = index
+	left = 2*index + 1
+	right = 2*index + 2
+	if(left < n and heap[left] < heap[minEle]):
+		minEle = left
+
+	if(right < n and heap[right] < heap[minEle]):
+		minEle = right
+
+	if(minEle != index):
+		heap[minEle],heap[index] = heap[index],heap[minEle]
+		heapify(heap, n, minEle)
+
+
+def deleteArbitary(heap, target, n):
+	index = 0
+	for index in range(n):
+		if(heap[index] == target):
+			break
+	if(index < n-1):
+		heap[index] = heap[n-1]
+		n -= 1
+		heap.pop()
+		heapify(heap, n, index)
+	else:
+		print("Target not found")
+
+
+ 
+
+
+
+n = 10 # Numbers Of Node
+ 
+# heap represents the following min heap:
+#            10
+#          /    \
+#       25        23
+#     /    \     /  \
+#   45      50  30   35
+#  /  \    /
+# 63  65  81
+ 
+heap = [10, 25, 23, 45, 50,
+        30, 35, 63, 65, 81]
+        
+
+target = int(input())
+deleteArbitary(heap, target, n)
+
+print(heap)
+     
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 86 
+File path: C:\Users\sudhe\Documents\Placements\Heaps\K_LargestEle.py
+
+
+'''
+	Given an array print the first k largets element in the array.
+
+	approch 1 : 
+		-> Find the maximum element in the array k times and delete it each time
+		-> Time complexity : O(K*N)
+
+	approch 2 : 
+		-> Sort the given array using any of the sorting algoritham
+		-> Print the maximum k elements
+		-> Time complexity : O(N * logN)
+
+	approch 3 :
+		-> Buid a maxHeap for the given array
+		-> Delete k deletions of the max elements
+		-> Time complexity : O(N) + O(K * logN)
+					O(N) -- To construct max heap
+					O(K * logN) -- for applying heapify k times
+
+	approch 4 :
+		-> Construct a BST   --  O(n**2)
+		-> Delete k largers elements -- O(k*n)
+		-> Time complexity : O(n**2)
+		-> Space complexity : O(N)
+
+	approch 5 :
+		-> Build a min heap using first k elements		-- O(k)
+		-> For all remaining (n-k) elements:   (O(NlogK - KlogK) = O(NlogK))
+				compare the root of heap with array element
+				if(root < array element):
+					replace root with array element and apply min heapify
+
+		-> Time compexity : O(k) + O(N * logK)
+'''
+
+
+# approch 5 implementation
+
+
+def buildMinHeap(heap, k):
+	for i in range(k//2 - 1, -1, -1):
+		minHeapify(heap, k, i)
+
+def minHeapify(heap, k, i):
+	minm = i
+	l = 2*i + 1
+	r = 2*i + 2
+	if(l < k and heap[l] < heap[minm]):
+		minm = l
+	if(r < k and heap[r] < heap[minm]):
+		minm = r
+
+	if(minm != i):
+		heap[i], heap[minm] = heap[minm], heap[i]
+		minHeapify(heap, k, minm)
+
+def find_K_LargestElements(heap, n, k):
+	buildMinHeap(heap, k)
+	print(heap)
+	for i in range(k, n):
+		# print(heap[0], heap[i])
+		if(heap[0] < heap[i]):
+			# print(i, "hii")
+			heap[0], heap[i] = heap[i], heap[0]
+			minHeapify(heap, k, 0)
+		# print(heap)
+
+	for i in range(k):
+		print(heap[i], end = " ")
+
+
+ 
+heap = list(map(int, input().split()))
+n = len(heap)
+k = int(input())
+find_K_LargestElements(heap, n, k)
+print(heap[0], "is the",k,"th largest element")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 87 
+File path: C:\Users\sudhe\Documents\Placements\Heaps\MaxEleInMinHeap.py
+
+
+'''
+	Given a min heap find the maximum element in that min heap.
+
+	approch : heap is a complete binary tree so we use array to store them
+
+	due to min heap the max ele present only in leaf nodes.
+
+	Time complexity : O(n/2 + 1) ~~ O(N)
+	Space complexity : O(n)
+
+	GFG : https://www.geeksforgeeks.org/maximum-element-in-min-heap/
+
+'''
+
+def findMaxEle(heap, n):
+	maxEle = heap[n//2]
+	for i in range(1+ n//2, n):
+		maxEle = max(maxEle, heap[i])
+	return maxEle
+
+
+n = 10 # Numbers Of Node
+ 
+# heap represents the following min heap:
+#            10
+#          /    \
+#       25        23
+#     /    \     /  \
+#   45      50  30   35
+#  /  \    /
+# 63  65  81
+ 
+heap = [10, 25, 23, 45, 50,
+        30, 35, 63, 65, 81]
+print(findMaxEle(heap, n))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 88 
+File path: C:\Users\sudhe\Documents\Placements\Heaps\MedianFromStream.py
+
+
+'''
+	Given a stream of numbers find the median of the numbers at any time
+
+	approch 1 :
+		-> sort the given elements find the median of the numbers
+		-> In this case insertion sort is better than merge sort because in the stream of numbers all the numbers before the courrent number
+			is sorted so insertion sort is better fit.
+		-> Time complexity : O(n**2)
+		-> Space complexity : O(1)
+
+	approch 2 :
+		-> Using BST
+		-> insert elements one by one into BST and at the same time balance the nodes that are in left and right chield of the root.
+		-> if the stream contains odd number of elements :
+				root node is the median of the stream of numbers
+			else:
+				if left subtree contains more elements than right subtree :
+					the other median is the greater  element in the left sub tree
+				else:
+					the other median is the greater element in the right sub tree
+
+		-> The maximum difference allowed between nodes in left subtree and right subtree is 1
+			-1 >= |cnt(left subtree) - cnt(right subtree)| <= 1
+
+		-> Time complexity : O(N)
+		-> Space complexity : O(N)
+
+	approch 3 :
+		-> Using Heaps
+		-> maintain one min heap and one max heap
+		-> if stream contain odd elements:
+			   median is present in one of the root of min or max heap
+		   else:
+		   	   one median is root of max heap and other is root of min heap
+
+		 -> The maximum difference allowed between nodes in max heap and min heap is 1
+			-1 >= |cnt(max heap) - cnt(min heap)| <= 1
+
+		-> Time complexity : O(N * logN)
+		-> Space complexity : O(N)
+
+'''
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 89 
+File path: C:\Users\sudhe\Documents\Placements\Heaps\MinHeapFromMaxHeap.py
+
+
+'''
+	Given a max heap convert the given max heap to min heap
+
+	approch 1 :
+			-> by using max heap property remove the max element every time and insert to min heap
+
+			-> Time complexity : O(N * logN)
+			-> Space complexity : O(N)
+
+	approch 2 :
+			-> Without involving the max heap try to build the min heap from the scartch
+			-> Time complexity : O(N)
+			-> Space complexity : O(1)
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 90 
+File path: C:\Users\sudhe\Documents\Placements\Heaps\TournamentProblem.py
+
+
+'''
+	Find number of matches required to conduct to decide the winner and the runner (second winner)
+
+	winner : n-1
+	second winner : log(N) -1
+
+	Time complexity to decide second winner : O(n + logN - 2)
+	
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 91 
+File path: C:\Users\sudhe\Documents\Placements\Linked List\DetectLoop.py
+
+
+'''
+	Given a linked list detect wheather the list contains loop or not if it contains loop find the first/starting node of the loop
+
+	GFG : https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/
+
+	Time complexity : O(N)
+	space complexity : O(1)
+'''
+class Node:
+	def __init__(self, val):
+		self.val = val
+		self.next = None
+
+class LinkedList:
+	def __init__(self):
+		self.head = None
+
+	def detectLoop(self):
+		fastPtr = slowPtr = self.head
+		containLoop = False
+		while(slowPtr and fastPtr and fastPtr.next):
+			slowPtr = slowPtr.next
+			fastPtr = fastPtr.next.next
+			if(slowPtr == fastPtr):
+				containLoop = True
+				break
+		if(containLoop):
+			slowPtr = self.head
+			while(slowPtr != fastPtr):
+				slowPtr = slowPtr.next
+				fastPtr = fastPtr.next
+			print(slowPtr.val)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 92 
+File path: C:\Users\sudhe\Documents\Placements\Linked List\FindMergePoint.py
+
+
+'''
+	Suppose there are two singly linked lists both of which merge at same point and become a single linked list find the node at which they merge ?
+
+	approch :
+
+	connect the end of the llist to any of the list head after this the question look like the previous one that determining the starting node of the loop in the llist.
+	
+	GFG : https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/
+'''
+
+def findMergepoint(head1, head2):
+	temp = head1
+	while(temp.next):
+		temp = temp.next
+
+	temp.next = head1
+	# now the loop contain 
+	mergePoint = detectLoop(head2)
+	print("mergePoint is", mergePoint)
+	temp.next = None
+	# deleating loop
+
+def detectLoop(head):
+	fastPtr = slowPtr = head
+	containLoop = False
+	while(slowPtr and fastPtr and fastPtr.next):
+		slowPtr = slowPtr.next
+		fastPtr = fastPtr.next.next
+		if(slowPtr == fastPtr):
+			containLoop = True
+			break
+	if(containLoop):
+		slowPtr = head
+		while(slowPtr != fastPtr):
+			slowPtr = slowPtr.next
+			fastPtr = fastPtr.next
+		return slowPtr
+	return None
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 93 
+File path: C:\Users\sudhe\Documents\Placements\Linked List\KthNodeFromEnd.py
+
+
+'''
+	Find the kth node from the end.
+
+	Time complexity : O(N)
+
+	approch1 : find the length of the llist than again traverse the list unitll n-k
+
+	approch2 : use 2 pointers one pointer is k steps differ from other.
+
+'''
+class Node:
+	def __init__(self, val):
+		self.val = val
+		self.next = None
+
+class LinkedList:
+	def __init__(self):
+		self.head = None
+
+	def insertAtBegin(self, val):
+		temp = Node(val)
+		if(self.head is not None):
+			temp.next = self.head
+		self.head = temp
+
+	def insertAtEnd(self, val):
+		temp = Node(val)
+		if(self.head is None):
+			self.head = temp
+		else:
+			ptr = self.head
+			while(ptr.next):
+				ptr = ptr.next
+
+			ptr.next = temp
+
+	def insertAtAny(self, after, val):
+		temp = Node(val)
+		ptr = self.head
+		while(ptr and ptr.val != after):
+			ptr = ptr.next
+
+		if(ptr is None):
+			print(after, "is not found in the Linked List")
+		else:
+			temp.next = ptr.next
+			ptr.next = temp
+
+	def deleteAtBegin(self):
+		if(self.head is None):
+			print("Linked list is empty deletion is not possible")
+		else:
+			self.head = self.head.next
+			print("Deleted")
+
+	def deleteAtEnd(self):
+		if(self.head is None):
+			print("Linked list is empty deletion is not possible")
+		elif(self.head.next is None):
+			self.head = None
+		else:
+			ptr = self.head.next
+			prev = self.head
+			while(ptr.next):
+				prev = ptr
+				ptr = ptr.next
+			prev.next = None
+			print("Deleted")
+
+	def deleteAtAny(self, val):
+		if(self.head is None):
+			print("Linked list is empty deletion is not possible")
+		elif(self.head.val == val):
+			self.head = self.head.next
+		else:
+			ptr = self.head.next
+			prev = self.head
+			while(ptr and ptr.val != val):
+				prev = ptr
+				ptr = ptr.next
+
+			if(ptr is None):
+				print(val, "is not found in the Linked List")
+			else:
+				prev.next = ptr.next
+
+	def kthNodeFromEnd(self, k):
+		temp = k
+		ptr1 = self.head
+		while(k > 0 and ptr1 != None):
+			ptr1 = ptr1.next
+			k -= 1
+		if(k>0):
+			print("length of the linked list is less than", temp)
+		else:
+			ptr2 = self.head
+			while(ptr1 != None):
+				ptr1 = ptr1.next
+				ptr2 = ptr2.next
+			print(ptr2.val, "is the ",temp,"th node from the end")
+
+	def travarse(self):
+		ptr = self.head
+		print("Elements in the linked list are:")
+		while(ptr):
+			print(ptr.val, end = " ")
+			ptr = ptr.next
+		print()
+
+llist = LinkedList()
+while(True):
+	choice = int(input("Enter operation 1) insertAtBegin 2) insertAtEnd 3)insertAtAny 4)deleteAtBegin 5)deleteAtEnd 6)deleteAtAny 7)kthNodeFromEnd 8)travarse 9)Exit: "))
+	if(choice == 1):
+		val = int(input("Enter element to insert:"))
+		llist.insertAtBegin(val)
+	elif(choice == 2):
+		val = int(input("Enter element to insert:"))
+		llist.insertAtEnd(val)
+	elif(choice == 3):
+		val = int(input("Enter element to insert:"))
+		after = int(input("Enter where do you want to insert:"))
+		llist.insertAtAny(after, val)
+	elif(choice == 4):
+		llist.deleteAtBegin()
+	elif(choice == 5):
+		llist.deleteAtEnd()
+	elif(choice == 6):
+		val = int(input("Enter element you want to delete:"))
+		llist.deleteAtAny(val)
+	elif(choice == 7):
+		k = int(input())
+		llist.kthNodeFromEnd(k)
+	elif(choice == 8):
+		llist.travarse()
+	else:
+		break
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 94 
+File path: C:\Users\sudhe\Documents\Placements\Linked List\MergeLists.py
+
+
+'''
+	Given two linked lists merge the two lists into one that in sorted order
+
+	Time complexity : O(m+n)
+'''
+def mergelists(list1, list2):
+	mergelist = list1
+	if(list1.val < list2.val):
+		mergelist = list1
+		list1 = list1.next
+	else:
+		mergelist = list2
+		list2 = list2.next
+	temp = mergelist
+	while(list1 and list2):
+		if(list1.val < list2.val):
+			temp.next = list1
+			temp = temp.next
+			list1 = list1.next
+		else:
+			temp.next = list2
+			temp = temp.next
+			list2 = list2.next
+	if(list1):
+		temp.next = list1
+	else:
+		temp.next = list2
+	return mergelist
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 95 
+File path: C:\Users\sudhe\Documents\Placements\Linked List\PalindromeList.py
+
+
+'''
+	Given a linked list check the given linked list is a palindrome or not
+
+	approch 1 : 
+
+		-> clone the given list
+
+		-> reverse the list
+
+		-> compare the clone list and the reverse list
+
+	approch 2 :
+
+		-> insert the elements into a stack while traversing the list first time
+
+		-> traverse the list again this time pop one element each time and compare with the element in the node
+
+	approch 3 :
+
+		-> find the middle point of the list using fast and slow pointer method
+
+		-> reverse the second part of the list ( list after the middle node)
+
+		-> compare the elements of list before the mid value and reversed list.
+
+	Time complexity : O(N)
+
+	GFG : https://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/
+	
+'''
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 96 
+File path: C:\Users\sudhe\Documents\Placements\Linked List\Reverse.py
+
+
+class Node:
+	def __init__(self, val):
+		self.val = val
+		self.next = None
+
+class LinkedList:
+	def __init__(self):
+		self.head = None
+
+	def insertAtBegin(self, val):
+		temp = Node(val)
+		if(self.head is not None):
+			temp.next = self.head
+		self.head = temp
+
+	def insertAtEnd(self, val):
+		temp = Node(val)
+		if(self.head is None):
+			self.head = temp
+		else:
+			ptr = self.head
+			while(ptr.next):
+				ptr = ptr.next
+
+			ptr.next = temp
+
+	def insertAtAny(self, after, val):
+		temp = Node(val)
+		ptr = self.head
+		while(ptr and ptr.val != after):
+			ptr = ptr.next
+
+		if(ptr is None):
+			print(after, "is not found in the Linked List")
+		else:
+			temp.next = ptr.next
+			ptr.next = temp
+
+	def deleteAtBegin(self):
+		if(self.head is None):
+			print("Linked list is empty deletion is not possible")
+		else:
+			self.head = self.head.next
+			print("Deleted")
+
+	def deleteAtEnd(self):
+		if(self.head is None):
+			print("Linked list is empty deletion is not possible")
+		elif(self.head.next is None):
+			self.head = None
+		else:
+			ptr = self.head.next
+			prev = self.head
+			while(ptr.next):
+				prev = ptr
+				ptr = ptr.next
+			prev.next = None
+			print("Deleted")
+
+	def deleteAtAny(self, val):
+		if(self.head is None):
+			print("Linked list is empty deletion is not possible")
+		elif(self.head.val == val):
+			self.head = self.head.next
+		else:
+			ptr = self.head.next
+			prev = self.head
+			while(ptr and ptr.val != val):
+				prev = ptr
+				ptr = ptr.next
+
+			if(ptr is None):
+				print(val, "is not found in the Linked List")
+			else:
+				prev.next = ptr.next
+
+	def reverse(self):
+		cur = self.head
+		prev = None
+		while(cur):
+			nxt = cur.next
+			cur.next = prev
+			prev = cur
+			cur = nxt
+		self.head = prev
+		print("Linked list is reversed")
+
+	def travarse(self):
+		ptr = self.head
+		print("Elements in the linked list are:")
+		while(ptr):
+			print(ptr.val, end = " ")
+			ptr = ptr.next
+		print()
+
+llist = LinkedList()
+while(True):
+	choice = int(input("Enter operation 1) insertAtBegin 2) insertAtEnd 3)insertAtAny 4)deleteAtBegin 5)deleteAtEnd 6)deleteAtAny 7)reverse 8)travarse 9)Exit: "))
+	if(choice == 1):
+		val = int(input("Enter element to insert:"))
+		llist.insertAtBegin(val)
+	elif(choice == 2):
+		val = int(input("Enter element to insert:"))
+		llist.insertAtEnd(val)
+	elif(choice == 3):
+		val = int(input("Enter element to insert:"))
+		after = int(input("Enter where do you want to insert:"))
+		llist.insertAtAny(after, val)
+	elif(choice == 4):
+		llist.deleteAtBegin()
+	elif(choice == 5):
+		llist.deleteAtEnd()
+	elif(choice == 6):
+		val = int(input("Enter element you want to delete:"))
+		llist.deleteAtAny(val)
+	elif(choice == 7):
+		llist.reverse()
+	elif(choice == 8):
+		llist.travarse()
+	else:
+		break
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 97 
+File path: C:\Users\sudhe\Documents\Placements\Mathametical_Problems\LuckyNum.py
+
+
+'''
+	Given a number check whether it is a lucky number or not.
+	the process of determining lucky number is first delete all the numbers which are at a distance of  2 than 3 ...
+	
+
+'''
+def lucky(n, cnt):
+	nxtPosition = n
+	if(cnt > n):
+		return True
+	if(n%cnt == 0):
+		return False
+	nxtPosition -= nxtPosition // cnt
+	cnt += 1
+	return lucky(nxtPosition, cnt)
+	
+n = int(input())
+if(lucky(n, 2)):
+	print(n, "is a lucky number")
+else:
+	print(n, "is not a lucky number")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 98 
+File path: C:\Users\sudhe\Documents\Placements\Mathametical_Problems\Prime.py
+
+
+'''
+	Check the given number is a prime number or not.
+
+	Time complexity : O(sqrt(n))
+	Space complexity : O(1)
+
+'''
+n = int(input())
+flag = True
+i = 2
+while(i*i <= n):
+	if(n%i == 0):
+		flag = False
+		break
+	i += 1
+if(flag):
+	print(n, "Prime number")
+else:
+	print(n, "not a prime number")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 99 
+File path: C:\Users\sudhe\Documents\Placements\Mathametical_Problems\PrimeNums.py
+
+
+'''
+	Print all the prime numbers unpto n.
+
+	Time complexity : O(n/2)
+	Space complexity : O(n)
+
+'''
+
+n = int(input())
+lst = [True] * (n+1)
+lst[0] = lst[1] = False
+i = 2
+while(i*2 <= n):
+	if(lst[i]):
+		j = 2
+		while(i*j <=n):
+			lst[i*j] = False
+			j += 1
+	i += 1
+for i in range(n+1):
+	if(lst[i]):
+		print(i)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 100 
+File path: C:\Users\sudhe\Documents\Placements\Pattern_Matching\BoyerMoore.py
+
+
+def search(str1, str2):
+	n = len(str1)
+	m = len(str2)
+	badChar = [-1] * 256
+	for i in range(m):
+		badChar[ord(str2[i])] = i
+
+	s = 0
+	while(s <= n-m):
+		j = m-1
+		while(j >= 0 and str1[s+j] == str2[j]):
+			j -= 1
+		if(j < 0):
+			print("substring found at", s)
+			s += (m - badChar[ord(str1[s+m])] if(s+m < n) else 1)
+		else:
+			s += max(1, j-badChar[ord(str1[s+j])])
+str1 = "abbabbaaabba"
+str2 = "abba"
+search(str1, str2)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 101 
+File path: C:\Users\sudhe\Documents\Placements\Pattern_Matching\FindOccurances.py
+
+
+'''
+	Find all the occurances of the string str2 in str1.
+	
+	This approch is also called Naive Search.
+	str1 = "abbabbaaabba"
+	str2 = "abba"
+
+	Time complexity : O(nm)  (in some edge casses TC is O(n**2) where n == m)
+	Space complexity : O(1)
+'''
+
+def findOccurances(s1, s2):
+	n = len(s1)
+	m = len(s2)
+	if(m > n):
+		print("No such substring is found")
+
+	for i in range(n-m+1):
+		k = i
+		for j in range(m):
+			if(s1[k] != s2[j]):
+				break
+			k += 1
+		else:
+			print("Substring found at", i)
+str1 = "abbabbaaabba"
+str2 = "abba"
+findOccurances(str1, str2)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 102 
+File path: C:\Users\sudhe\Documents\Placements\Stack\BalancedParathasis.py
+
+
+'''
+{[()]}{[()]} is a balanced paranthasis.
+'''
+
+class Stack:
+	def __init__(self):
+		self.stk=[]
+		self.top=-1
+	def push(self,ele):
+		self.stk.append(ele)
+		self.top+=1
+	def pop(self):
+		if(self.top<0):
+			return
+		self.top-=1
+		return self.stk.pop()
+	def balancedParanthasis(self,parStr):
+		for i in parStr:
+			if(i=='(' or i=='[' or i=='{'):
+				self.push(i)
+			elif(i=='}' and self.stk[self.top]=='{'):
+				self.pop()
+			elif(i==']' and self.stk[self.top]=='['):
+				self.pop()
+			elif(i==')' and self.stk[self.top]=='('):
+				self.pop()
+			else:
+				return False
+		if(self.top>=0):
+			return False
+		return True
+s=Stack()
+parStr=input()
+if(s.balancedParanthasis(parStr)):
+	print("Balanced paranthasis")
+else:
+	print("Imbalance paranthasis")
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 103 
+File path: C:\Users\sudhe\Documents\Placements\Stack\BracketReversal.py
+
+
+'''
+	Find the minimum number of reversals of a brackers required to get the paranthasis balanced.
+
+	Time complexity :O(k) where k is the length of  the string
+'''
+
+class Stack:
+	def __init__(self):
+		self.stk=[]
+		self.top=-1
+	def push(self,ele):
+		self.stk.append(ele)
+		self.top+=1
+	def pop(self):
+		if(self.top<0):
+			return
+		self.top-=1
+		return self.stk.pop()
+	def numberOfReversals(self,s):
+		for i in s:
+			if(i=='{'):
+				self.push(i)
+			else:
+				if(self.top<0):
+					self.push(i)
+				else:
+					ele=self.stk[self.top]
+					if(ele=='{'):
+						self.pop()
+					else:
+						self.push(i)
+		stkLength=self.top+1
+		n=0
+		ele=self.pop()
+		while(self.top>=0 and ele=='{'):
+			if(ele=='{'):
+				n+=1
+			ele=self.pop()
+		return (stkLength//2)+(n%2)
+s=Stack()
+inp=input()
+print(s.numberOfReversals(inp))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 104 
+File path: C:\Users\sudhe\Documents\Placements\Stack\CellebrityProblem.py
+
+
+'''
+	
+	Given a list of names find the one who is celebrity in the given list of names.
+
+	A person is a celebrity only if all other persons in the list know that person and he doesn't know them.
+'''
+
+class Stack:
+	def __init__(self,names,mat):
+		self.stk=[]
+		self.names=names
+		self.mat=mat
+		self.top=-1
+	def push(self,ele):
+		self.stk.append(ele)
+		self.top+=1
+	def pop(self):
+		if(self.top<0):
+			return
+		self.top-=1
+		return self.stk.pop()
+	def knows(self,person1,person2):
+		if(self.mat[person1][person2]==1):
+			return True
+		return False
+	def findCelibrity(self):
+		for i in range(len(self.names)):
+			self.push(i)
+		while(self.top>0):
+			person1=self.pop()
+			person2=self.pop()
+			if(self.knows(person1,person2)):
+				if(self.knows(person2,person1)==False):
+					self.push(person2)
+			else:
+				if(self.knows(person2,person1)):
+					self.push(person1)
+		return self.names[self.pop()]
+
+names=input().split()
+mat=[(list(map(int,input().split()))) for i in range(len(names))]
+s=Stack(names,mat)
+print(s.findCelibrity())
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 105 
+File path: C:\Users\sudhe\Documents\Placements\Stack\DuplicateParanthasis.py
+
+
+'''
+	
+	Given an expression check whether the string contain duplicate paranthasis or not.
+
+	Duplicate paranthasis is () or ((1+3))
+
+	Time complexity : O(n)
+	Space Complexity : O(n)
+'''
+class Stack:
+	def __init__(self):
+		self.stk=[]
+		self.top=-1
+	def push(self,ele):
+		self.stk.append(ele)
+		self.top+=1
+	def pop(self):
+		if(self.top<0):
+			return
+		self.top-=1
+		return self.stk.pop()
+	def checkDuplicateParanthasis(self,s):
+		for i in s:
+			if(i!=')'):
+				self.push(i)
+			elif(self.top<0):
+				print("Invalid syntax")
+				return False
+			else:
+				ele=self.pop()
+				if(ele=='('):
+					return False
+				while(ele!='(' and self.top>=0):
+					ele=self.pop()
+		return True
+s=Stack()
+exp=input()
+if(s.checkDuplicateParanthasis(exp)):
+	print("There is no duplicate paranthasis found in the given expression")
+else:
+	print("Duplicate paranthasis found")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 106 
+File path: C:\Users\sudhe\Documents\Placements\Stack\GetMinInO(1).py
+
+
+'''
+	Implement a stack such that it takes constant time for push,pop,getmin
+
+	Time complexity : O(1)
+	Space complexity : O(1)
+'''
+
+class Stack:
+	def __init__(self):
+		self.stk=[]
+		self.size=0
+		self.curMin=99999
+	def push(self,ele):
+		if(len(self.stk)==0):
+			self.stk.append(ele)
+			self.curMin=ele
+			self.size+=1
+			return
+		if(ele<self.curMin):
+			self.stk.append(ele-self.curMin)
+			self.curMin=ele
+		else:
+			self.stk.append(ele)
+	def pop(self):
+		ele=self.stk.pop()
+		self.size-=1
+		if(ele<self.curMin):
+			temp=self.curMin
+			self.curMin=self.curMin-ele
+			return temp
+		return ele
+	def getMin(self):
+		return self.curMin
+	def getSize(self):
+		return self.size
+	def printStk(self):
+		print(self.stk) 
+s=Stack()
+x=0
+while(x!=-1):
+	x=int(input("Enter operation 1: Push, 2: Pop, 3:Get minimum , 4: Get size, 5:print stack  -1: Exit  ::"))
+	if(x==1):
+		ele=int(input("Enter element:"))
+		s.push(ele)
+	elif(x==2):
+		print("poped element is",s.pop())
+	elif(x==3):
+		print("minimum element is",s.getMin())
+	elif(x==4):
+		print("size is",s.getSize())
+	elif(x==5):
+		s.printStk()
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 107 
+File path: C:\Users\sudhe\Documents\Placements\Stack\GetMinInO(n).py
+
+
+'''
+	Implement a stack such that it takes constant time for push,pop,getmin
+
+	Time complexity : O(1)
+	Space complexity : O(n)
+'''
+
+class Stack:
+	def __init__(self):
+		self.stk1=[]
+		self.stk2=[]
+		self.top1=-1
+		self.top2=-1
+	def push(self,ele):
+		if(len(self.stk1)==0):
+			self.stk1.append(ele)
+			self.stk2.append(ele)
+			self.top1+=1
+			self.top2+=1
+		else:
+			self.stk1.append(ele)
+			self.top1+=1
+			if(ele<=self.stk2[self.top2]):
+				self.stk2.append(ele)
+				self.top2+=1
+	def pop(self):
+		if(self.top1<0):
+			return
+		if(self.stk1[self.top1]==self.stk2[self.top2]):
+			ele=self.stk1.pop()
+			self.stk2.pop()
+			self.top1-=1
+			self.top2-=1
+		else:
+			ele=self.stk1.pop()
+			self.top1-=1
+		return ele 
+	def getMin(self):
+		if(self.top2<0):
+			return
+		return self.stk2[self.top2]
+s=Stack()
+x=0
+while(x!=-1):
+	x=int(input("Enter operation 1: Push, 2: Pop, 3:Get minimum , -1: Exit  ::"))
+	if(x==1):
+		ele=int(input("Enter element:"))
+		s.push(ele)
+	elif(x==2):
+		print("poped element is",s.pop())
+	elif(x==3):
+		print("minimum element is",s.getMin())
+
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 108 
+File path: C:\Users\sudhe\Documents\Placements\Stack\NextGreaterEle.py
+
+
+'''
+	Given an array for each element find the next greateer element of the element on right side of the array.
+
+	Time complexity : O(n)
+	space complexity : O(1)
+'''
+
+class Stack:
+	def __init__(self):
+		self.stk=[]
+		self.top=-1
+	def push(self,ele):
+		self.stk.append(ele)
+		self.top+=1
+	def pop(self):
+		if(self.top<0):
+			return None
+		self.top-=1
+		return self.stk.pop()
+	def nextGreater(self,lst):
+		self.push(lst[0])
+		for i in range(1,len(lst)):
+			nextEle=lst[i]
+			if(self.top>=0):
+				ele=self.pop()
+				while(ele<nextEle):
+					print(ele,"--->",nextEle)
+					if(self.top<0):
+						break
+					ele=self.pop()
+				if(ele>nextEle):
+					self.push(ele)
+			self.push(nextEle)
+		while(self.top>=0):
+			ele=self.pop()
+			print("There is maximum element found on right side of ",ele)
+s=Stack()
+lst=list(map(int,input().split()))
+s.nextGreater(lst)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 109 
+File path: C:\Users\sudhe\Documents\Placements\Stack\StackReverse.py
+
+
+'''
+	
+	Reverse the given stack without using another stack.
+
+'''
+
+class Stack:
+	def __init__(self):
+		self.stk=[1,2,3,4]
+		self.top=3
+	def reverse(self):
+		item=-1
+		if(self.top>=0):
+			item=self.stk.pop()
+			self.top-=1
+			if(self.top!=0):
+				self.reverse()
+		self.pushAtBottum(item)
+	def pushAtBottum(self,item):
+		if(self.top<0):
+			self.stk.append(item)
+			self.top+=1
+		else:
+			topEle=self.stk.pop()
+			self.top-=1
+			self.pushAtBottum(item)
+			self.stk.append(topEle)
+			self.top+=1
+	def printStack(self):
+		print(self.stk)
+s=Stack()
+s.printStack()
+s.reverse()
+s.printStack()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 110 
+File path: C:\Users\sudhe\Documents\Placements\Stack\StackUsingQueue.py
+
+
+'''
+
+	Stack data structure
+
+	
+	Implement a stack operations(push,pop,peek) using 2 queues
+''' 
+
+from queue import Queue
+
+class Stack:
+	def __init__(self):
+		self.q1=Queue()
+		self.q2=Queue()
+		self.size=0
+	def push(self,ele):
+		self.q1.put(ele)
+		self.size+=1
+	def pop(self):
+		if(self.q1.empty()):
+			return
+		while(self.q1.qsize()!=1):
+			self.q2.put(self.q1.get())
+		ele=self.q1.get()
+		self.size-=1
+		self.q1,self.q2=self.q2,self.q1
+	def top(self):
+		if(self.q1.empty()):
+			return
+		while(self.q1.qsize()!=1):
+			self.q2.put(self.q1.get())
+		top=self.q1.queue[0]
+		self.q2.put(self.q1.get())
+		self.q1,self.q2=self.q2,self.q1
+		return top
+	def getSize(self):
+		return self.size
+
+s = Stack()
+s.push(1)
+s.push(2)
+s.push(3)
+s.push(4)
+
+print("current size: ", s.getSize())
+print(s.top())
+s.pop()
+print(s.top())
+s.pop()
+print(s.top())
+
+print("current size: ", s.getSize())
+ 
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 111 
+File path: C:\Users\sudhe\Documents\Placements\Stack\StockSpanProblem.py
+
+
+'''
+	
+	This is a financial problem written where we have a series of n daily price
+	 quotes and we need to calculate span of stock's price for all n days.
+
+	 100 30 10 20 25 40 26 35 45
+
+	 0   0   0  1  2  4  0  1   7
+'''
+
+class Stack:
+	def __init__(self):
+		self.stk=[]
+		self.top=-1
+	def push(self,ele):
+		self.stk.append(ele)
+		self.top+=1
+	def pop(self):
+		if(self.top<0):
+			return
+		self.top-=1
+		return self.stk.pop()
+	def stockSpan(self,prices):
+		span=[0]
+		self.push(0)
+		for i in range(1,len(prices)):
+			index=self.stk[self.top]
+			curPrice=prices[i]
+			while(prices[index]<curPrice and self.top>=0):
+				self.pop()
+				if(self.top<0):
+					break
+				index=self.stk[self.top]
+			if(self.top<0):
+				span.append(i)
+			else:
+				span.append(i-index-1)
+			self.push(i)
+		return span
+s=Stack()
+prices=list(map(int,input().split()))
+print(s.stockSpan(prices))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 112 
+File path: C:\Users\sudhe\Documents\Placements\Strings\Anagarams.py
+
+
+'''
+	Given two strings check the two strings are anagarams or not.
+
+	Two strings are anagarams only if they contain the same charecters.
+'''
+def checkAnagaram(str1, str2):
+	if(len(str1) != len(str2)):
+		return False
+	l = len(str1)
+	hMap = dict()
+	for i in range(l):
+		if(hMap.get(str1[i])):
+			hMap[str1[i]] += 1
+		else:
+			hMap[str1[i]] = 1
+	for i in range(l):
+		if(hMap.get(str2[i])):
+			hMap[str2[i]] -= 1
+		else:
+			return False
+	for val in hMap.values():
+		if(val > 0):
+			return False
+	return True
+
+str1 = input()
+str2 = input()
+if(checkAnagaram(str1, str2)):
+	print("These two strings are anagarams")
+else:
+	print("These two strings are not anagarams")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 113 
+File path: C:\Users\sudhe\Documents\Placements\Strings\ExcelColumnNames.py
+
+
+'''
+	Given a number find the excel column name of that number.
+
+	Excel column names are like A,B,C,............,Z,AA,AB,AC..............
+'''
+
+def findColName(num):
+	name = ""
+	while(num > 0):
+		rem = num % 26
+		if(rem == 0):
+			name += "Z"
+			num = num//26 - 1
+		else:
+			name += chr(rem - 1 + ord("A"))
+			num = num//26
+	return name[::-1]
+
+def findColNumber(name):
+	num = 0
+	base = 0
+	for ch in name[::-1]:
+		num += (ord(ch) - ord("A") + 1) * (26 ** base)
+		base += 1
+	return num
+
+num = int(input())
+name = findColName(num)
+print(name)
+print(findColNumber(name))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 114 
+File path: C:\Users\sudhe\Documents\Placements\Strings\FirstNonRepeatingChar(approch2).py
+
+
+'''
+	Given a string find the first non repeating charechter in the given string.
+	Time complexity : O(n)
+	space complexity : O(1)
+
+	This approch is using single string traversals.
+'''
+
+def firstNonRepeatingChar(string):
+	countArr = [-1] * 256
+	for i in string:
+		if(countArr[ord(i)] == -1):
+			countArr[ord(i)] = ord(i)
+		else:
+			countArr[ord(i)] = -2
+
+	res = 99999
+	for i in range(256):
+		if(countArr[i] >= 0):
+			res = min(res, countArr[i])
+
+	if(res == 99999):
+		return -1
+	return chr(res)
+
+s = input()
+res = firstNonRepeatingChar(s)
+if(res == -1):
+	print("There is no non repeating charechter")
+else:
+	print("First non repeating charechter is", res)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 115 
+File path: C:\Users\sudhe\Documents\Placements\Strings\FirstNonRepeatingChar.py
+
+
+'''
+	Given a string find the first non repeating charechter in the given string.
+	Time complexity : O(n)
+	space complexity : O(n)
+
+	This approch is using two string traversals.
+'''
+
+def firstNonRepeatingChar(string):
+	count = [0] * 256
+	for i in string:
+		count[ord(i)] += 1
+	for i in string:
+		if(count[ord(i)] == 1):
+			return i
+	return -1
+s = input()
+res = firstNonRepeatingChar(s)
+if(res == -1):
+	print("There is no non repeating charechter")
+else:
+	print("First non repeating charechter is", res)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 116 
+File path: C:\Users\sudhe\Documents\Placements\Trees\ArrayToBT.py
+
+
+'''
+	Given an array of integers in sorted order convert them to a balanced binary search tree
+
+	Time complexity : O(n) 
+	Space complexity : O(h)  /   O(n) Worst case
+
+'''
+
+class Node:
+	def __init__(self, val):
+		self.left = None
+		self.val = val
+		self.right = None
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def sortedArrayToBT(self, arr, start, end):
+		self.root = self.convertArrToBT(arr, start, end)
+
+	def convertArrToBT(self, arr, start, end):
+		if(start > end):
+			return
+
+		mid = (start + end)//2
+		root = Node(arr[mid])
+		root.left = self.convertArrToBT(arr, start, mid-1)
+		root.right = self.convertArrToBT(arr, mid+1, end)
+		return root
+
+	def preorder(self):
+		self.printPreorder(self.root)
+
+	def printPreorder(self, root):
+		if(not root):
+			return
+
+		print(root.val, end=" ")
+		self.printPreorder(root.left)
+		self.printPreorder(root.right)
+
+t = Tree()
+arr = list(map(int, input().split()))
+t.sortedArrayToBT(arr, 0, len(arr)-1)
+t.preorder()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 117 
+File path: C:\Users\sudhe\Documents\Placements\Trees\BottemView.py
+
+
+'''
+	print the  bottem view of the tree.
+
+	Time complexity : O(n)
+	space complexity : O(n)
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.minm = 0
+		self.maxm = 0
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+
+	def bottemView(self):
+		d = dict()
+		hd = 0
+		self.getbottemView(self.root, hd, d)
+		for value in sorted(d):
+			for ele in d[value]:
+				print(ele, end = " ")
+			print()
+
+	def getbottemView(self, root, hd, d):
+		if(not root):
+			return
+
+		if(not d.get(hd)):
+			d[hd] = [root.val]
+		else:
+			d[hd] = [root.val]
+
+		self.getbottemView(root.left, hd - 1, d)
+		self.getbottemView(root.right, hd + 1, d)
+
+t =Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+t.bottemView()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 118 
+File path: C:\Users\sudhe\Documents\Placements\Trees\BoundaryTraversal.py
+
+
+'''
+	Given a tree print the boundary traversal of the tree.
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.eleArr = []
+
+	def insert(self):
+		self.root = Node("a")
+		self.root.left = Node("b")
+		self.root.left.right = Node("c")
+		self.root.left.right.left = Node("d")
+		self.root.right = Node("e")
+		self.root.right.right = Node("f")
+		self.root.right.right.left = Node("g")
+		self.root.right.right.right = Node("h")
+
+	def boundaryTraversal(self):
+		t.printLeftBoundary(self.root)
+		t.printLeafs(self.root)
+		t.printRightBoundary(self.root)
+
+	def printLeafs(self, root):
+		if(not root):
+			return
+		self.printLeafs(root.left)
+		if(root.left == None and root.right == None):
+			print(root.val, end = " ")
+		self.printLeafs(root.right)
+
+	def printLeftBoundary(self, root):
+		if(root != None):
+			if(root.left != None):
+				print(root.val, end = " ")
+				self.printLeftBoundary(root.left)
+			elif(root.right != None):
+				print(root.val, end = " ")
+				self.printLeftBoundary(root.right)
+
+	def printRightBoundary(self, root):
+		if(root != None):
+			if(root.right != None):
+				self.printRightBoundary(root.right)
+				print(root.val, end = " ")
+			elif(root.left != None):
+				self.printRightBoundary(root.left)
+				print(root.val, end = " ")
+t = Tree()
+t.insert()
+t.boundaryTraversal()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 119 
+File path: C:\Users\sudhe\Documents\Placements\Trees\BSTtoBalancedBST.py
+
+
+'''
+	Given a binary tree convert the binary tree to its balanced form.
+
+	Time complexity :  O(nlogn)
+
+	Space complexity : O(h)   /   O(n)    worst case
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insertNodes(self):
+		self.root = Node(10)
+		self.root.right = Node(20)
+		self.root.right.right = Node(30)
+		self.root.right.right.right = Node(40)
+		self.root.right.right.right.right = Node(50)
+		self.root.right.right.right.right.right = Node(60)
+
+	def balanceBST(self):
+		arr = []
+		self.convertToArr(self.root, arr)
+		self.root = self.convertArrToBalanceBST(arr, 0, len(arr)-1)
+
+	def convertToArr(self, root, arr):
+		if(not root):
+			return
+
+		self.convertToArr(root.left, arr)
+		arr.append(root)
+		self.convertToArr(root.right, arr)
+
+	def convertArrToBalanceBST(self, arr, start, end):
+		if(start > end):
+			return None
+
+		mid = (start + end)//2
+		root = arr[mid]
+		root.left = self.convertArrToBalanceBST(arr, start, mid-1)
+		root.right = self.convertArrToBalanceBST(arr, mid+1, end)
+
+		return root
+
+	def calculateHeight(self):
+		return self.heightOfTree(self.root)
+
+	def heightOfTree(self, root):
+		if(not root):
+			return -1
+		else:
+			lheight = self.heightOfTree(root.left)
+			rheight = self.heightOfTree(root.right)
+			return max(lheight, rheight) + 1
+
+	def inorder(self):
+		self.printInorder(self.root)
+
+	def printInorder(self, root):
+		if(not root):
+			return
+		self.printInorder(root.left)
+		print(root.val, end = " ")
+		self.printInorder(root.right)
+
+t = Tree()
+t.insertNodes()
+t.inorder()
+print()
+print(t.calculateHeight())
+t.balanceBST()
+t.inorder()
+print()
+print(t.calculateHeight())
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 120 
+File path: C:\Users\sudhe\Documents\Placements\Trees\BT_to_DLL.py
+
+
+'''
+	Convert the binary tree into double linked list in place, in such a way
+	that the order of nodes in Double linked list represents the inorder
+	traversal of binary tree.
+
+	Time complexity : O(n**2)
+	Space complexity : O(1)
+'''
+
+class Node:
+
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def BTtoDLL(self):
+		root = self.convertBTtoDll(self.root);
+		while(root.left):
+			root = root.left
+
+		self.printDll(root)
+
+	def convertBTtoDll(self, root):
+		if(not root):
+			return None
+
+		if(root.left):
+			lTree = self.convertBTtoDll(root.left)
+			while(lTree.right):
+				lTree = lTree.right
+
+			root.left = lTree
+			lTree.right = root
+
+		if(root.right):
+			rTree = self.convertBTtoDll(root.right)
+			while(rTree.left):
+				rTree = rTree.left
+
+			root.right = rTree
+			rTree.left = root
+
+		return root
+
+	def printDll(self, root):
+		while(root):
+			print(root.val, end=" ")
+			root = root.right
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+t.BTtoDLL()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 121 
+File path: C:\Users\sudhe\Documents\Placements\Trees\BT_to_DLLapproch2.py
+
+
+'''
+	Convert the binary tree into double linked list in place, in such a way
+	that the order of nodes in Double linked list represents the inorder
+	traversal of binary tree.
+
+	Time complexity : O(n)
+	Space complexity : O(1)
+
+	Not completed.
+'''
+
+class Node:
+
+	def __init__(self, val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class DLLNode:
+	def __init__(self, val):
+		self.prev = None
+		self.val = val
+		self.next = None
+
+class Tree:
+
+	def __init__(self):
+		self.root = None
+		self.DLL = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def BTtoDLL(self):
+		if(not self.root):
+			return None
+
+		self.DLL = self.DLLNode(self.root.val)
+		root = self.convertBTtoDll(self.root);
+		while(root.left):
+			root = root.left
+
+		self.printDll(root)
+
+	def convertBTtoDll(self, root):
+		if(not root):
+			return None
+
+		if(root.left):
+			temp = self.DLLNode(root.left.val)
+			if(not self.DLL.prev):
+				temp.next = self.DLL
+				self.DLL.prev = temp
+				self.DLL = self.DLL.prev
+			else:
+				self.DLL.next = temp
+				temp.prev = self.DLL
+				self.DLL = self.DLL.next
+			self.convertBTtoDll(root.left)
+
+		if(root.right):
+			temp = self.DLLNode(root.right.val)
+			if(not self.DLL.next):
+				self.DLL.next = temp
+				temp.prev = self.DLL
+			else:
+				temp.next = self.DLL.next
+				self.DLL.next = temp
+				self.DLL.next.prev = temp
+				temp.prev = self.DLL
+
+			if(not root.left and not root.right):
+				self.DLL = self.DLL.prev
+			self.DLL = self.DLL.next
+			self.convertBTtoDll(root.right)
+			
+
+		self.DLL = self.DLL.next
+
+	def printDll(self, root):
+		while(root):
+			print(root.val, end=" ")
+			root = root.right
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+t.BTtoDLL()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 122 
+File path: C:\Users\sudhe\Documents\Placements\Trees\CheckFoldableTree.py
+
+
+'''
+	Given a tree check wheather the given tree is foldable or not.
+
+	Time complexity : O(N)
+	Space complexity : O(N)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def checkFoldable(self):
+		if(not self.root):
+			return False
+		return self.checkFoldableUtil(self.root.left, self.root.right)
+
+	def checkFoldableUtil(self, left, right):
+		if(not left and not right):
+			return True
+
+		if(not left or not right):
+			return False
+
+		return self.checkFoldableUtil(left.left, right.right) and self.checkFoldableUtil(left.right, right.left)
+
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+foldable = t.checkFoldable()
+if(foldable):
+	print("Tree is foldable")
+else:
+	print("Tree is not foldable")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 123 
+File path: C:\Users\sudhe\Documents\Placements\Trees\CheckIdenticalTrees.py
+
+
+'''
+	Given two roots of two trees check whether the two trees are identical or not.
+
+	identical means containing same elements in same places.
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def inorder(self, temp):
+		if(not temp):
+			return
+
+		self.inorder(temp.left)
+		print(temp.val, end=" ")
+		self.inorder(temp.right) 
+
+	def isIdentical(self, other):
+		return self.checkIsIdentical(self.root, other.root)
+
+	def checkIsIdentical(self, root1, root2):
+		if(not root1 and not root2):
+			return True
+
+		if(root1 != None and root2 != None and root1.val == root2.val):
+			lTree = self.checkIsIdentical(root1.left, root2.left)
+			if(lTree == False):
+				return False
+
+			return self.checkIsIdentical(root1.right, root2.right)
+			
+		return False
+
+	#	return root1.val == root2.val and self.checkIsIdentical(root1.left, root2.val) and self.checkIsIdentical(root1.right, root2.right) 
+
+t1=Tree()
+vals=list(map(int, input("Enter elements of tree 1:").split()))
+for i in vals:
+	t1.insert(i)
+
+t2=Tree()
+vals=list(map(int, input("Enter elements of tree 2:").split()))
+for i in vals:
+	t2.insert(i)
+
+if(t1.isIdentical(t2)):
+	print("Both the trees are identical")
+else:
+	print("Both the trees are not identical")
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 124 
+File path: C:\Users\sudhe\Documents\Placements\Trees\ChildrenSum.py
+
+
+'''
+	Given a binary tree convert the binary tree to satisfy Children sum property
+
+	Time complexity :  O(n*n)
+
+	GFG : https://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#:~:text=Algorithm%3A%20Traverse%20the%20given%20tree,and%20children%20sum%20be%20diff.&text=If%20diff%20is%200%20then%20nothing%20needs%20to%20be%20done.
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insertNodes(self):
+		self.root = Node(50)
+		self.root.left = Node(7)
+		self.root.right = Node(2)
+		self.root.left.left = Node(3)
+		self.root.left.right = Node(5)
+		self.root.right.left = Node(1)
+		self.root.right.right = Node(30)
+
+	
+	def convertToChildrenSumTree(self):
+		self.convertToChildrenSumTreeUtil(self.root)
+
+	def convertToChildrenSumTreeUtil(self, root):
+		leftData = rightData = diff = 0
+		if(root == None or (root.left == None and root.right == None)):
+			return
+		self.convertToChildrenSumTreeUtil(root.left)
+		self.convertToChildrenSumTreeUtil(root.right)
+
+		if(root.left != None):
+			leftData = root.left.val
+
+		if(root.right != None):
+			rightData = root.right.val
+
+		diff = leftData + rightData - root.val
+
+		if(diff > 0):
+			root.val += diff
+		else:
+			self.increament(root, -diff)
+
+	def increament(self, root, diff):
+		if(root.left != None):
+			root.left.val += diff
+			self.increament(root.left, diff)
+		elif(root.right != None):
+			root.right.val += diff
+			self.increament(root.right, diff)
+
+	def inorder(self):
+		self.printInorder(self.root)
+
+	def printInorder(self, root):
+		if(not root):
+			return
+		self.printInorder(root.left)
+		print(root.val, end = " ")
+		self.printInorder(root.right)
+
+t = Tree()
+t.insertNodes()
+t.inorder()
+print()
+t.convertToChildrenSumTree()
+t.inorder()
+print()
+
+
+
+'''
+OUTPUT:
+
+C:\Users\sudhe\Documents\Placements\Trees>python ChildrenSum.py
+3 7 5 50 1 2 30
+14 19 5 50 1 31 30
+
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 125 
+File path: C:\Users\sudhe\Documents\Placements\Trees\ConstructBTusingPreAndInTraversal.py
+
+
+'''
+	Given preorder and inorder traversal of a binary tree with these traversals construct 
+	a tree.
+
+	Time complexity : O(n)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.val = val
+		self.right = None
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.preIndex = 0
+
+	def buildTree(self, pre, inorder):
+		self.root = self.constructBT(pre, inorder, 0, len(inorder)-1)
+
+	def constructBT(self, pre, inorder, inStart, inEnd):
+		if(inStart > inEnd):
+			return None
+		tNode = Node(pre[self.preIndex])
+		self.preIndex += 1
+
+		if(inStart == inEnd):
+			return tNode
+
+		inIndex = self.search(inorder, inStart, inEnd, tNode.val)
+		tNode.left = self.constructBT(pre, inorder, inStart, inIndex-1)
+		tNode.right = self.constructBT(pre, inorder, inIndex+1, inEnd)
+
+		return tNode
+
+	def search(self, inorder, inStart, inEnd, val):
+		for i in range(inStart, inEnd+1):
+			if(inorder[i] == val):
+				return i 
+
+	def postorder(self):
+		self.printPostorder(self.root)
+
+	def printPostorder(self, root):
+		if(not root):
+			return
+		self.printPostorder(root.left)
+		self.printPostorder(root.right)
+		print(root.val, end = " ")
+
+t = Tree()
+pre = input().split()
+inorder = input().split()
+t.buildTree(pre, inorder)
+t.postorder()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 126 
+File path: C:\Users\sudhe\Documents\Placements\Trees\ConvertToSumTree.py
+
+
+'''
+	Given a binary tree convert that tree to sum tree.
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self):
+		self.root = Node(10)
+		self.root.left = Node(3)
+		self.root.left.left = Node(1)
+		self.root.left.right = Node(4)
+		self.root.left.right.left = Node(7)
+		self.root.right = Node(5)
+		self.root.right.left = Node(13)
+		self.root.right.right = Node(6)
+
+	def sumTree(self):
+		self.convertToSumTree(self.root)
+
+	def convertToSumTree(self, root):
+		if(not root):
+			return 0
+		presentNodeValue = root.val
+		lSum = self.convertToSumTree(root.left)
+		rSum = self.convertToSumTree(root.right)
+		root.val = lSum + rSum
+		return presentNodeValue + root.val
+
+	def preorder(self):
+		self.printPreorder(self.root)
+
+	def printPreorder(self, root):
+		if(not root):
+			return
+		print(root.val, end = " ")
+		self.printPreorder(root.left)
+		self.printPreorder(root.right)
+t = Tree()
+t.insert()
+t.preorder()
+print()
+t.sumTree()
+t.preorder()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 127 
+File path: C:\Users\sudhe\Documents\Placements\Trees\ConvertToSumTree2.py
+
+
+'''
+	Given a binary tree convert the given tree into sum tree.
+
+	Vedio link: "D:\Placement\Trees\84.Interview Preparation Convert a given tree to its sum tree.mp4"
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def isSumTree(self):
+		res = self.checkSumTree(self.root)
+		if(res == -1):
+			print("This tree is  not a sum tree")
+		else:
+			print("This tree is a sum tree")
+
+	def checkSumTree(self, root):
+		if(not root):
+			return 0
+
+		if(not root.left and not root.right):
+			return root.val
+
+		leftSum = self.checkSumTree(root.left)
+		if(leftSum == -1):
+			return -1
+
+		rightSum = self.checkSumTree(root.right)
+		if(rightSum == -1):
+			return -1
+
+		if(root.val == leftSum + rightSum):
+			return root.val + leftSum + rightSum
+
+		return -1
+
+	def convertToSumTree(self):
+		self.convertToSumTreeUtil(self.root)
+
+	def convertToSumTreeUtil(self, root):
+		if(not root):
+			return 0
+		prev = root.val
+		l = self.convertToSumTreeUtil(root.left)
+		r = self.convertToSumTreeUtil(root.right)
+		root.val = l+r 
+		return prev + root.val
+
+	def preorder(self):
+		self.printPreorder(self.root)
+
+	def printPreorder(self, root):
+		if(not root):
+			return
+		print(root.val, end = " ")
+		self.printPreorder(root.left)
+		self.printPreorder(root.right)
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+t.isSumTree()
+t.preorder()
+print()
+t.convertToSumTree()
+t.preorder()
+print()
+t.isSumTree()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 128 
+File path: C:\Users\sudhe\Documents\Placements\Trees\CountElementsInTree.py
+
+
+'''
+	Count number of elements in the tree.
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left=None
+		self.right=None
+		self.val=val
+class Tree:
+	def __init__(self):
+		self.root=None
+	def insert(self,val):
+		temp=self.root
+		if(not temp):
+			self.root=Node(val)
+			return
+		q=[temp]
+		while(len(q)!=0):
+			temp=q.pop(0)
+			if(not temp.left):
+				temp.left=Node(val)
+				break
+			else:
+				q.append(temp.left)
+			if(not temp.right):
+				temp.right=Node(val)
+				break
+			else:
+				q.append(temp.right)
+	def inorder(self):
+		self.printInorder(self.root)
+
+	def printInorder(self, root):
+		if(not root):
+			return
+		self.printInorder(root.left)
+		print(root.val,end=" ")
+		self.printInorder(root.right)
+
+	def countElements(self,temp):
+		if(not temp):
+			return 0
+		return 1+self.countElements(temp.left)+self.countElements(temp.right)
+t=Tree()
+vals=list(map(int,input().split()))
+for i in vals:
+	t.insert(i)
+t.inorder()
+
+print("\nTotal",t.countElements(t.root),"in the tree")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 129 
+File path: C:\Users\sudhe\Documents\Placements\Trees\Cousins.py
+
+
+'''
+		Given a tree and two data values check whether the two data values are cousins or not.
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def level(self, root, key, level):
+		if(not root):
+			return -1
+		if(root.val == key):
+			return level
+
+		lTree = self.level(root.left, key, level+1)
+		if(lTree == -1):
+			return self.level(root.right, key, level+1)
+		return lTree
+
+	def siblings(self, root, data1, data2):
+		if(not root):
+			return False
+
+		res = False
+		if(root.left != None and root.right != None):
+			lVal = root.left.val
+			rVal = root.right.val
+			if(lVal == data1 and rVal == data2):
+				return True
+			if(lVal == data2 and rVal == data1):
+				return True
+		if(root.left != None):
+			res = res or self.siblings(root.left, data1, data2)
+		if(root.right != None):
+			res = res or self.siblings(root.right, data1, data2)
+
+		return res
+
+	def cousins(self, data1, data2):
+		if((self.level(self.root, data1, 0) == self.level(self.root, data2, 0)) and (not self.siblings(self.root, data1, data2))):
+			return True
+		else:
+			return False
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+data1 = int(input())
+data2 = int(input())
+if(t.cousins(data1, data2)):
+	print(data1, data2, "are cousins")
+else:
+	print(data1, data2, "are not cousins")
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 130 
+File path: C:\Users\sudhe\Documents\Placements\Trees\DiagnoalTraversal.py
+
+
+'''
+	Given a tree print the nodes of the tree in diagnoal traversal.
+
+	Time complexity : O(n)
+	Space complexity : O(n)
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def diagnoalOrder(self):
+		d = dict()
+		self.printDiagnoalOrder(self.root, 0, d)
+		for value in sorted(d):
+			for ele in d[value]:
+				print(ele, end = " ")
+			print()
+
+	def printDiagnoalOrder(self, root, diag, d):
+		if(not root):
+			return
+		if(not d.get(diag)):
+			d[diag] = [root.val]
+		else:
+			d[diag].append(root.val)
+		self.printDiagnoalOrder(root.left, diag + 1, d)
+		self.printDiagnoalOrder(root.right, diag, d)
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+t.diagnoalOrder()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 131 
+File path: C:\Users\sudhe\Documents\Placements\Trees\DiamaterOfTree.py
+
+
+'''
+	Calculate the diameter of the given tree.
+
+	Time complexity : O(n)
+	Space complexity : O(n)
+
+'''
+diameter = 0
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def treeDiamater(self):
+		return max(self.calculateTreeDiamater(self.root))
+
+	def calculateTreeDiamater(self, root):
+		if(not root):
+			return (0,0)
+
+		lTree = self.calculateTreeDiamater(root.left)
+		rTree = self.calculateTreeDiamater(root.right)
+		height = max(lTree[0], rTree[0]) + 1
+		diameter = max(lTree[1], rTree[1], 1 + lTree[0] + rTree[0])
+		return (height,diameter)
+
+'''
+	
+	Leetcode problem:
+	https://leetcode.com/problems/diameter-of-binary-tree/
+
+'''
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 132 
+File path: C:\Users\sudhe\Documents\Placements\Trees\ExpressionEvaluation.py
+
+
+'''
+	
+	Evaluate the expression that is in tree form.
+'''
+
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insertNodes(self):
+		self.root = Node("+")
+		self.root.left = Node("/")
+		self.root.left.left = Node("*")
+		self.root.left.left.left = Node(10)
+		self.root.left.left.right = Node(2)
+		self.root.left.right = Node(5)
+		self.root.right = Node("-")
+		self.root.right.left = Node(100)
+		self.root.right.right = Node("*")
+		self.root.right.right.left = Node(3)
+		self.root.right.right.right = Node(30)
+
+	def expressionEvaluation(self):
+		return self.expressionEvaluationUtil(self.root)
+
+	def expressionEvaluationUtil(self, root):
+		if(not root):
+			return None
+
+		if(root.left == None and root.right == None):
+			return root.val
+		lSum = self.expressionEvaluationUtil(root.left)
+		rSum = self.expressionEvaluationUtil(root.right)
+		if(root.val == "+"):
+			return lSum + rSum
+		elif(root.val == "-"):
+			return lSum - rSum
+		elif(root.val == "*"):
+			return lSum * rSum
+		elif(root.val == "/"):
+			return lSum / rSum
+t = Tree()
+t.insertNodes()
+print(t.expressionEvaluation())
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 133 
+File path: C:\Users\sudhe\Documents\Placements\Trees\FindCommonAnsistor.py
+
+
+'''
+	
+	Find the common ansistor of two nodes in a Binay search tree(BST).
+
+	Time complexity : O(h)  / O(n)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insertBST(self,val):
+		self.root = self.insertVal(self.root,val)
+
+	def insertVal(self,root,val):
+		if(not root):
+			return Node(val)
+
+		if(root.val < val):
+			root.right = self.insertVal(root.right, val)
+		elif(root.val > val):
+			root.left = self.insertVal(root.left, val)
+		else:
+			return root
+
+		return root
+
+	def inorder(self):
+		self.printInorder(self.root)
+
+	def printInorder(self, temp):
+		if(not temp):
+			return
+
+		self.printInorder(temp.left)
+		print(temp.val, end=" ")
+		self.printInorder(temp.right)
+
+	def commonAnsistor(self, val1, val2):
+		return self.findCommonAnsistor(self.root, val1, val2)
+
+	def findCommonAnsistor(self, root, val1, val2):
+		if(not root):
+			return None
+
+		if(root.val > val1 and root.val > val2):
+			return self.findCommonAnsistor(root.left, val1, val2)
+
+		if(root.val < val1 and root.val < val2):
+			return self.findCommonAnsistor(root.right, val1, val2)
+
+		return root.val 
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insertBST(val)
+
+val1 = int(input("Enter first value:"))
+val2 = int(input("Enter second value:"))
+print("Common ansistor is",t.commonAnsistor(val1,val2))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 134 
+File path: C:\Users\sudhe\Documents\Placements\Trees\FindVerticalBoundaries.py
+
+
+'''
+	
+	Given a tree find the vertical boundaries of the given tree.
+
+	Time complexity : O(n)
+	Space complexity : O(h)
+
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.minm = 0
+		self.maxm = 0
+
+	def insertNodes(self):
+		self.root = Node(1)
+		self.root.left = Node(2)
+		self.root.right = Node(3)
+		self.root.left.left = Node(4)
+		self.root.left.right = Node(5)
+		self.root.right.left = Node(6)
+		self.root.right.right = Node(7)
+		self.root.right.left.right = Node(8)
+		self.root.right.right.right = Node(9)
+
+	def findMinMax(self):
+		self.findMinMaxUtil(self.root, 0)
+		print(self.minm, self.maxm)
+
+	def findMinMaxUtil(self, root, hd):
+		if(not root):
+			return
+		if(hd < self.minm):
+			self.minm = hd
+
+		if(hd > self.maxm):
+			self.maxm = hd
+
+		self.findMinMaxUtil(root.left, hd-1)
+		self.findMinMaxUtil(root.right, hd+1)
+
+t = Tree()
+t.insertNodes()
+t.findMinMax()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 135 
+File path: C:\Users\sudhe\Documents\Placements\Trees\GetKeys.py
+
+
+'''
+	Print all the keys that are at a distance k from the root.
+
+	Time complexity : O(2**k)	# since every node is visited 3 times.
+	Space complexity : O(k)   # Depth of the recursion stack is k.
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def getKeys(self, k):
+		self.getKeysUtil(self.root, k, 0)
+
+	def getKeysUtil(self, root, k, dist):
+		if(root):
+			if(k == dist):
+				print(root.val, end=" ")
+				return
+
+			self.getKeysUtil(root.left, k, dist+1)
+			self.getKeysUtil(root.right, k, dist+1)
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+k = int(input("Enter level:"))
+t.getKeys(k) 
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 136 
+File path: C:\Users\sudhe\Documents\Placements\Trees\GetLevel.py
+
+
+'''
+	Find which level that a given key lies.
+	
+	Time complexity : O(n)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def getLevel(self, key):
+		return self.findLevel(self.root, key, 0)
+
+	def findLevel(self, root, key, level):
+		if(not root):
+			return -1
+
+		if(root.val == key):
+			return level
+
+		lTree = self.findLevel(root.left, key, level+1)
+		if(lTree != -1):
+			return lTree
+
+		return self.findLevel(root.right, key, level+1)
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+key = int(input("Enter the key you want to find:"))
+print(key, "found at", t.getLevel(key))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 137 
+File path: C:\Users\sudhe\Documents\Placements\Trees\GetNodes.py
+
+
+'''
+	Find all the keys that are at a distance of k from the given node.
+
+	Time complexity : O(n)
+	Space Complexity : O(h)
+
+'''
+
+# Not completed giving worng outputs
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+	def insertNodes(self):
+		self.root = Node(20)
+		self.root.left = Node(8)
+		self.root.right = Node(22)
+		self.root.left.left = Node(4)
+		self.root.left.right = Node(12)
+		self.root.left.right.left = Node(10)
+		self.root.left.right.right = Node(14)
+	def printkDistanceNodeDown(self, root, k):
+		if(not root or k<0):
+			return 
+
+		if(k == 0):
+			print(root.val)
+			return
+
+		self.printkDistanceNodeDown(root.left, k-1)
+		self.printkDistanceNodeDown(root.right, k-1)
+
+	def printkDistanceNodeUtil(self, key, k):
+		self.printkDistanceNode(self.root, key, k)
+
+	def printkDistanceNode(self, root, key, k):
+		if(not root):
+			return -1
+
+		if(root.val == key):
+			self.printkDistanceNodeDown(root, k)
+			return 0
+
+		dl = self.printkDistanceNode(root.left, key, k-1)
+		if(dl != -1):
+			if(dl - 1 == k):
+				print(root.val)
+			else:
+				self.printkDistanceNodeDown(root, k-dl-2)
+
+			return 1+dl
+
+		dr = self.printkDistanceNode(root.right, key, k-1)
+		if(dr != -1):
+			if(dr-1 ==k):
+				print(root.val)
+			else:
+				self.printkDistanceNodeDown(root.left, k-dr-1)
+
+			return 1+dr 
+
+		return -1
+
+
+t = Tree()
+t.insertNodes()
+target = t.root.left.right.val
+t.printkDistanceNodeUtil(target, 2)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 138 
+File path: C:\Users\sudhe\Documents\Placements\Trees\InsertEleInTree.py
+
+
+'''
+	Insert elements in level wise in a tree
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def inorder(self, temp):
+		if(not temp):
+			return
+
+		self.inorder(temp.left)
+		print(temp.val, end=" ")
+		self.inorder(temp.right)
+
+t=Tree()
+vals=list(map(int,input().split()))
+for i in vals:
+	t.insert(i)
+t.inorder(t.root)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 139 
+File path: C:\Users\sudhe\Documents\Placements\Trees\LeftView.py
+
+
+'''
+	print the  bottem view of the tree.
+
+	Time complexity : O(n)
+	space complexity : O(n)
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.minm = 0
+		self.maxm = 0
+		self.maxLevel = 0
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+
+	def leftView(self):
+		level = 1
+		self.printLeftView(self.root, level)
+
+	def printLeftView(self, root, level):
+		if(not root):
+			return
+
+		if(level > self.maxLevel):
+			print(root.val)
+			self.maxLevel = level
+
+		self.printLeftView(root.left, level+1)
+		self.printLeftView(root.right, level+1)
+
+t =Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+t.leftView()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 140 
+File path: C:\Users\sudhe\Documents\Placements\Trees\LevelOrderTravarsal.py
+
+
+'''
+	Print the level order travarsal for a tree.
+
+	Time complexity : O(n)
+	Space complexity : O(n/2)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def inorder(self):
+		self.printInorder(self.root)
+
+	def printInorder(self, temp):
+		if(not temp):
+			return
+
+		self.printInorder(temp.left)
+		print(temp.val, end=" ")
+		self.printInorder(temp.right)
+
+	def levelOrder(self):
+		if(not self.root):
+			return
+
+		q = [self.root]
+		while(len(q) != 0):
+			temp=q.pop(0)
+			print(temp.val, end=" ")
+			if(temp.left):
+				q.append(temp.left)
+
+			if(temp.right):
+				q.append(temp.right)
+t=Tree()
+vals=list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+t.levelOrder()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 141 
+File path: C:\Users\sudhe\Documents\Placements\Trees\LevelOrderTravarsalInSpiral.py
+
+
+'''
+	
+	traverse the tree in level order in spiral form
+
+	Time complexity : O(n)
+	Space complexity : O(n)
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		arr=self.root
+		if(not arr):
+			self.root = Node(val)
+			return
+
+		q = [arr]
+		while(len(q) != 0):
+			arr = q.pop(0)
+			if(not arr.left):
+				arr.left = Node(val)
+				break
+			else:
+				q.append(arr.left)
+
+			if(not arr.right):
+				arr.right = Node(val)
+				break
+			else:
+				q.append(arr.right)
+
+	def levelOrder(self):
+		self.printLevelOrderInSpiral(self.root)
+
+	def printLevelOrderInSpiral(self, root):
+		if(not root):
+			return
+		s1 = [root]
+		s2 = []
+		while(len(s1) != 0 or len(s2) != 0):
+			while(len(s1) != 0):
+				temp = s1.pop()
+				print(temp.val, end = " ")
+				if(temp.right != None):
+					s2.append(temp.right)
+				if(temp.left != None):
+					s2.append(temp.left)
+
+			while(len(s2) != 0):
+				temp = s2.pop()
+				print(temp.val, end = " ")
+				if(temp.left != None):
+					s1.append(temp.left)
+				if(temp.right != None):
+					s1.append(temp.right)
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+t.levelOrder()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 142 
+File path: C:\Users\sudhe\Documents\Placements\Trees\LevelProduct.py
+
+
+'''
+	Given a binary tree calculate the product of each level sum in the tree.
+
+	Time complexity : O(n)
+	Space complexity : O(h)
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def levelProduct(self):
+		return self.calculateLevelProduct(self.root)
+
+	def calculateLevelProduct(self, root):
+		if(not root):
+			return 0
+		prod = 1
+		q = [self.root]
+		prod = 1
+		while(len(q) != 0):
+			nodeCount = len(q)
+			n = nodeCount
+			levelSum = 0
+			while(n > 0):
+				n -= 1
+				temp = q.pop(0)
+				if(temp.left != None):
+					q.append(temp.left)
+				if(temp.right != None):
+					q.append(temp.right)
+				levelSum += temp.val
+			prod *= levelSum
+		return prod
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+print(t.levelProduct())
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 143 
+File path: C:\Users\sudhe\Documents\Placements\Trees\LowestCommonAnsistor.py
+
+
+'''
+	
+	Find the common ansistor of two nodes in a Binay tree.
+
+	Time complexity :  O(n)
+	Space complexity : O(n)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def commonAnsistor(self, val1, val2):
+		path1 = self.findPath(self.root, val1)
+		path2 = self.findPath(self.root, val2)
+		n = min(len(path1), len(path2))
+		for i in range(n):
+			if(path1[i] != path2[i]):
+				return path1[i-1]
+				
+	def findPath(self, root, val):
+		if(root == None):
+			return False
+		if(root.val == val):
+			return [val]
+
+		path = [root.val]
+		tempPath = self.findPath(root.left, val)
+		if(tempPath != False):
+			return path+tempPath
+
+		tempPath = self.findPath(root.right, val)
+		if(tempPath != False):
+			return path+tempPath
+
+		return False
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+val1 = int(input("Enter first value:"))
+val2 = int(input("Enter second value:"))
+print("Common ansistor is",t.commonAnsistor(val1,val2))
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 144 
+File path: C:\Users\sudhe\Documents\Placements\Trees\MaxDiff.py
+
+
+'''
+	Given a binary tree find the maximum of all differences of a node from it's ansistors.
+	
+	Time complexity : O(n)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.maxDif = 0
+		
+	def insert(self):
+		self.root = Node(25)	
+		self.root.left = Node(32)
+		self.root.right = Node(45)
+		self.root.left.left = Node(3)
+		self.root.left.right = Node(50)
+		self.root.left.right.left = Node(4)
+		self.root.right.left = Node(2)
+		self.root.left.right = Node(15)
+		self.root.right.left.right = Node(-5)
+
+	def maxDiff(self):
+		self.calculateMaxDiff(self.root)
+		return self.maxDif
+
+	def calculateMaxDiff(self, root):
+		if(not root):
+			return 9999
+		if(root.left == None and root.right == None):
+			return root.val
+		lMin = self.calculateMaxDiff(root.left)
+		rMin = self.calculateMaxDiff(root.right)
+		minm = min(lMin, rMin)
+		self.maxDif = max(self.maxDif, root.val - minm)
+		# print(lMin, rMin, minm, self.maxDif)
+		return min(minm, root.val)
+t = Tree()
+t.insert()
+print(t.maxDiff())
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 145 
+File path: C:\Users\sudhe\Documents\Placements\Trees\MaxDiffBetweenNodeAndAnsistors.py
+
+
+'''
+	Find The maximum differance between node and its ansistors in a tree.
+
+	vedio link : "D:\Placement\Trees\69.Interview Preparation Find maximum difference between node and its ancestor in a binary tree.mp4"
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.maxDiff = 0
+
+	def insert(self):
+		self.root = Node(25)
+		self.root.left = Node(32)
+		self.root.right = Node(45)
+		self.root.left.left = Node(3)
+		self.root.left.right = Node(50)
+		self.root.left.right.left = Node(4)
+		self.root.right.left = Node(2)
+		self.root.right.right = Node(15)
+		self.root.right.left.right = Node(-5)
+
+	def maxDiffBetweenNodeAndAnsistors(self):
+		self.minChild(self.root)
+		return self.maxDiff
+
+	def minChild(self, root):
+		if(root.left == None and root.right == None):
+			return root.val 
+		lval = rval = 0
+		if(root.left):
+			lval = self.minChild(root.left)
+		if(root.right):
+			rval = self.minChild(root.right)
+		minm = min(lval, rval)
+		self.maxDiff = max(self.maxDiff, root.val-minm)
+		return min(minm, root.val)
+
+	
+
+t =Tree()
+t.insert()
+print(t.maxDiffBetweenNodeAndAnsistors())
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 146 
+File path: C:\Users\sudhe\Documents\Placements\Trees\MirrorTree.py
+
+
+'''
+	Given a binary tree convert the given binary tree to its mirror form.
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def inorder(self):
+		self.printInorder(self.root)
+
+	def printInorder(self, temp):
+		if(not temp):
+			return
+
+		self.printInorder(temp.left)
+		print(temp.val, end=" ")
+		self.printInorder(temp.right)
+
+	def mirrorTree(self):
+		self.convertToMirrorTree(self.root)
+
+	def convertToMirrorTree(self, root):
+		if(not root):
+			return
+		self.convertToMirrorTree(root.left)
+		self.convertToMirrorTree(root.right)
+		root.left, root.right = root.right, root.left
+
+t=Tree()
+vals=list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+t.inorder()
+print()
+t.mirrorTree()
+t.inorder()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 147 
+File path: C:\Users\sudhe\Documents\Placements\Trees\NextRightNode.py
+
+
+'''
+	Given a root of the tree find the next right most node to that element.
+
+
+	Vedio link : "D:\Placement\Trees\80.Interview Preparation Find the next right node of a given key.mp4"
+	
+	Time complexity : O(N)
+
+	Space Complexity : O(N)
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def nxtRightNode(self, target):
+		q = [self.root]
+		while(len(q) != 0):
+			size = len(q)
+			while(size != 0):
+				size -= 1
+				temp = q.pop(0)
+				if(temp.val == target):
+					if(size == 0):
+						print("There is no right node after", target)
+					else:
+						print(q[0].val, "is the right node to ", target)
+				if(temp.left):
+					q.append(temp.left)
+				if(temp.right):
+					q.append(temp.right)
+
+
+t =Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+target = int(input())
+t.nxtRightNode(target)
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 148 
+File path: C:\Users\sudhe\Documents\Placements\Trees\PrintExtremenNodes.py
+
+
+'''
+	Given a binary tree print the nodes in extremes alternatively.
+
+	Time complexity : O(n)
+	Space complexity : O(n)
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insertNodes(self):
+		self.root = Node(1)
+
+		self.root.left = Node(2)
+		self.root.right = Node(3)
+		 
+		self.root.left.left = Node(4)
+		self.root.left.right = Node(5)
+		self.root.right.right = Node(7)
+		 
+		self.root.left.left.left = Node(8)
+		self.root.left.left.right = Node(9)
+		self.root.left.right.left = Node(10)
+		self.root.left.right.right = Node(11)
+		self.root.right.right.left = Node(14)
+		self.root.right.right.right = Node(15)
+		 
+		self.root.left.left.left.left = Node(16)
+		self.root.left.left.left.right = Node(17)
+		self.root.right.right.right.right = Node(31)
+
+	def printExtremeNodes(self):
+		self.printExtremeNodesUtil(self.root)
+
+	def printExtremeNodesUtil(self, root):
+		if(not root):
+			return
+
+		q = [root]
+		flag = False
+		while(len(q) > 0):
+			nodeCnt = len(q)
+			n = nodeCnt
+			while(n > 0):
+				cur = q[0]
+				n -=1
+				if(cur.left != None):
+					q.append(cur.left)
+
+				if(cur.right != None):
+					q.append(cur.right)
+
+				if(flag and n == nodeCnt-1):
+					print(cur.val, end = " ")
+
+				if(not flag and n == 0):
+					print(cur.val, end = " ")
+				q.pop(0)
+			flag = not flag
+
+t= Tree()
+t.insertNodes()
+t.printExtremeNodes()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 149 
+File path: C:\Users\sudhe\Documents\Placements\Trees\PrintNodesKdistFromLeaves.py
+
+
+'''
+	Given a tree print all the nodes which are at a distance k from the leave nodes.
+
+	Time complexity : O(n)
+	Space complexity : O(n)
+
+'''
+
+class newNode:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def insertNodes(self):
+		self.root = newNode(1)
+		self.root.left = newNode(2)
+		self.root.right = newNode(3)
+		self.root.left.left = newNode(4)
+		self.root.left.right = newNode(5)
+		self.root.right.left = newNode(6)
+		self.root.right.right = newNode(7)
+		self.root.right.left.right = newNode(8)
+
+	def printKdistNodesFromLeaf(self, k):
+		pre = [None]*100
+		visit = [False]*100
+		self.printKdistNodesFromLeafUtil(self.root, pre, visit, k, 0)
+
+	def printKdistNodesFromLeafUtil(self, root, pre, visit, k, pathLen):
+		if(not root):
+			return
+
+		pre[pathLen] = root.val
+		pathLen += 1
+		if(root.left == None and root.right == None and (pathLen-k-1) >= 0 and visit[pathLen-k-1] == False):
+			print(pre[pathLen-k-1])
+			visit[pathLen-k-1] = True
+			return
+		self.printKdistNodesFromLeafUtil(root.left, pre, visit, k, pathLen)
+		self.printKdistNodesFromLeafUtil(root.right, pre, visit, k, pathLen)
+
+t = Tree()
+# vals = list(map(int, input().split()))
+# for val in vals:
+# 	t.insert(val)
+
+t.insertNodes()
+k = int(input())
+t.printKdistNodesFromLeaf(k)
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 150 
+File path: C:\Users\sudhe\Documents\Placements\Trees\PrintPathsToleaves.py
+
+
+'''
+	Given a binary tree print all possible paths from the root node to leave nodes.
+	
+	Time complexity : O(n)
+	Space complexity : O(n)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		arr=self.root
+		if(not arr):
+			self.root = Node(val)
+			return
+
+		q = [arr]
+		while(len(q) != 0):
+			arr = q.pop(0)
+			if(not arr.left):
+				arr.left = Node(val)
+				break
+			else:
+				q.append(arr.left)
+
+			if(not arr.right):
+				arr.right = Node(val)
+				break
+			else:
+				q.append(arr.right)
+
+
+	def pathsFromRootToLeaves(self):
+		arr = []
+		self.printPathsFromRootToLeaves(self.root, arr)
+
+	def printPathsFromRootToLeaves(self, root, arr):
+		if(root.left == None and root.right == None):
+			print("->".join(arr+[root.val]))
+			return
+		self.printPathsFromRootToLeaves(root.left, arr+[root.val])
+		self.printPathsFromRootToLeaves(root.right, arr+[root.val])
+
+t = Tree()
+vals = input().split()
+for val in vals:
+	t.insert(val)
+
+t.pathsFromRootToLeaves()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 151 
+File path: C:\Users\sudhe\Documents\Placements\Trees\ProductLevelSum.py
+
+
+'''
+	Given a root of the tree find the sum of all the nodes at each level and multiply them.
+
+	Time complexity : O(N)
+
+	Space Complexity : O(N)
+
+	GFG : https://www.geeksforgeeks.org/sum-of-all-nodes-at-kth-level-in-a-binary-tree/
+	not the same but used as referance
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def productLevelSum(self):
+		if(not self.root):
+			return
+		q = [self.root]
+		levelSum = 0
+		prod = 1
+		while(len(q) != 0):
+			size = len(q)
+			levelSum = 0
+			while(size != 0):
+				size -= 1
+				temp = q.pop(0)
+				levelSum += temp.val
+				if(temp.left):
+					q.append(temp.left)
+				if(temp.right):
+					q.append(temp.right)
+			prod *= levelSum
+		return prod 
+
+t =Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+print(t.productLevelSum())
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 152 
+File path: C:\Users\sudhe\Documents\Placements\Trees\RemoveNodes.py
+
+
+'''
+	Remove all nodes whose length is less than k from the given binary tree.
+
+	Time complexity : O(n)
+	Space complexity : O(h)
+
+	Uncompleted.
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.minm = 0
+		self.maxm = 0
+
+	def insertNodes(self):
+		self.root = Node(1)
+		self.root.left = Node(2)
+		self.root.right = Node(3)
+		self.root.left.left = Node(4)
+		self.root.left.right = Node(5)
+		self.root.right.left = Node(6)
+		self.root.right.right = Node(7)
+		self.root.left.right.left = Node(8)
+		self.root.left.right.right = Node(9)
+		self.root.left.right.left.left = Node(10)
+	def removeNodes(self, k):
+		self.removeKdistNodes(self.root, k)
+
+	def removeKdistNodes(self, root, k):
+		if(not root):
+			return None
+		if(k == 0):
+			return root
+
+		root.left = self.removeKdistNodes(root.left, k-1)
+		root.right = self.removeKdistNodes(root.right, k-1)
+
+		if(root.left == None and root.right == None):
+			return None
+
+	def inorder(self):
+		self.printInorder(self.root)
+
+	def printInorder(self, root):
+		if(not root):
+			return
+		self.printInorder(root.left)
+		print(root.val, end = " ")
+		self.printInorder(root.right)
+
+
+t = Tree()
+k = 3
+t.insertNodes()
+print("Inorder Traversal of Original tree" )
+t.inorder()
+print()
+print("Inorder Traversal of Modified tree" )
+t.removeNodes(k)
+t.inorder()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 153 
+File path: C:\Users\sudhe\Documents\Placements\Trees\SerializeAndDeserialize.py
+
+
+'''
+	Given a tree serialize and deserialize the tree.
+
+	Time complexity : O(n)
+	Space complexity : O(n)
+'''
+
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.eleArr = []
+
+	def insert(self):
+		self.root = Node("a")
+		self.root.left = Node("b")
+		self.root.left.right = Node("c")
+		self.root.left.right.left = Node("d")
+		self.root.right = Node("e")
+		self.root.right.right = Node("f")
+		self.root.right.right.left = Node("g")
+		self.root.right.right.right = Node("h")
+
+	def serilize(self):
+		self.eleArr = []
+		self.convertSerilize(self.root)
+		print(self.eleArr)
+
+	def convertSerilize(self, root):
+		if(not root):
+			self.eleArr.append(None)
+			return
+		self.eleArr.append(root.val)
+		self.convertSerilize(root.left)
+		self.convertSerilize(root.right)
+
+	def preorder(self):
+		self.printPreorder(self.root)
+		print()
+
+	def printPreorder(self, root):
+		if(not root):
+			return
+		print(root.val, end = " ")
+		self.printPreorder(root.left)
+		self.printPreorder(root.right)
+
+	def deserilize(self):
+		self.root = self.convertDeserilize()
+
+	def convertDeserilize(self):
+		if(len(self.eleArr) >= 0 and self.eleArr[0] == None):
+			self.eleArr.pop(0)
+			return None
+		root = Node(self.eleArr[0])
+		self.eleArr.pop(0)
+		root.left = self.convertDeserilize()
+		root.right = self.convertDeserilize()
+		return root
+
+t = Tree()
+t.insert()
+t.preorder()
+t.serilize()
+t.deserilize()
+t.preorder()
+t.serilize()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 154 
+File path: C:\Users\sudhe\Documents\Placements\Trees\Siblings.py
+
+
+'''
+	Given a tree and two data values check whether the two data values are siblings or not.
+
+	Time complexity : O(n)
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def siblings(self, data1, data2):
+		return self.isSiblings(self.root, data1, data2)
+
+	def isSiblings(self, root, data1, data2):
+		if(not root):
+			return False
+
+		res = False
+		if(root.left != None and root.right != None):
+			if(root.left.val == data1 and root.right.val == data2):
+				return True
+			if(root.left.val == data2 and root.right.val == data1):
+				return True
+
+		if(root.left != None):
+			res = res or self.isSiblings(root.left, data1, data2)
+
+		if(root.right != None):
+			res = res or self.isSiblings(root.right, data1, data2)
+
+		return res
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+data1 = int(input())
+data2 = int(input())
+if(t.siblings(data1, data2)):
+	print(data1, data2, "are siblings")
+else:
+	print(data1, data2, "are not siblings")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 155 
+File path: C:\Users\sudhe\Documents\Placements\Trees\SubTree.py
+
+
+'''
+	Given two binary trees check whether tree2 is a subtree of tree1 or not.
+
+	Time complexity : O(m*n)
+
+	m : number of nodes in tree1
+	n : number of nodes in tree2
+
+	Space complexity : O(n)
+
+	The logic is it uses preorder traversal whenever a node is root node of 2nd tree is appear in the
+	tree 1 then check for the two trees are identical or not if yes tree2 is subtree of tree1 otherwise not.
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def isSubTree(self, other):
+		return self.containSubTree(self.root, other.root)
+
+	def containSubTree(self, root1, root2):
+		if(not root1):
+			return False
+
+		if(root1.val == root2.val):
+			res = self.isIdentical(root1, root2)
+			if(res):
+				return True
+
+		return self.containSubTree(root1.left, root2)
+		return self.containSubTree(root1.right, root2)
+
+	def isIdentical(self, root1, root2):
+		if(not root1 and not root2):
+			return True
+
+		if(root1 != None and root2 != None and root1.val == root2.val):
+			lTree = self.isIdentical(root1.left, root2.left)
+			if(lTree == False):
+				return False
+
+			return self.isIdentical(root1.right, root2.right)
+
+		return False
+
+t1 = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t1.insert(val)
+
+t2 = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t2.insert(val)
+
+res = t1.isSubTree(t2)
+if(res):
+	print("Tree 2 is a sub tree of Tree 1")
+else:
+	print("Tree 2 is not a sub tree of Tree 1")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 156 
+File path: C:\Users\sudhe\Documents\Placements\Trees\SubTreeApproch2.py
+
+
+'''
+	Given two binary trees check whether tree2 is a subtree of tree1 or not.
+
+	Time complexity : O(m*n)
+
+	m : number of nodes in tree1
+	n : number of nodes in tree2
+
+	Space complexity : O(n)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def subTree(self, other):
+		return self.isSubTree(self.root, other.root)
+
+	def isSubTree(self, root1, root2):
+		if(not root2):
+			return True
+		if(not root1):
+			return False
+		if(self.areIdentical(root1, root2)):
+			return True
+
+		return (self.isSubTree(root1.left, root2) or self.isSubTree(root1.right, root2))
+
+	def areIdentical(self, root1, root2):
+		if(not root1 and not root2):
+			return True
+		if(not root1 or not root2):
+			return False
+
+		return(root1.val == root2.val and self.areIdentical(root1.left, root2.left) and self.areIdentical(root1.right, root2.right))
+
+t1 = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t1.insert(val)
+
+t2 = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t2.insert(val)
+
+res = t1.subTree(t2)
+if(res):
+	print("Tree 2 is a sub tree of Tree 1")
+else:
+	print("Tree 2 is not a sub tree of Tree 1")
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 157 
+File path: C:\Users\sudhe\Documents\Placements\Trees\SumTree.py
+
+
+'''
+	Check the given tree is a sum tree or not.
+	A sum tree is the value of a node is equal to the sum of the values in the left sub tree and the value in the right sub tree.
+
+	Time complexity : O(N)
+	Space complexity : O(h)
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+class Tree:
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def sumTree(self):
+		res = self.checkSumTree(self.root)
+		if(res == -1):
+			print("This tree is  not a sum tree")
+		else:
+			print("This tree is a sum tree")
+
+	def checkSumTree(self, root):
+		if(not root):
+			return 0
+
+		if(not root.left and not root.right):
+			return root.val
+
+		leftSum = self.checkSumTree(root.left)
+		if(leftSum == -1):
+			return -1
+
+		rightSum = self.checkSumTree(root.right)
+		if(rightSum == -1):
+			return -1
+
+		if(root.val == leftSum + rightSum):
+			return root.val + leftSum + rightSum
+
+		return -1
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+t.sumTree()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 158 
+File path: C:\Users\sudhe\Documents\Placements\Trees\TopView.py
+
+
+'''
+	print the  top view of the tree.
+
+	Time complexity : O(n)
+	space complexity : O(n)
+
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.minm = 0
+		self.maxm = 0
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+
+	def topView(self):
+		d = dict()
+		hd = 0
+		self.getTopView(self.root, hd, d)
+		for value in sorted(d):
+			for ele in d[value]:
+				print(ele, end = " ")
+			print()
+
+	def getTopView(self, root, hd, d):
+		if(not root):
+			return
+
+		if(not d.get(hd)):
+			d[hd] = [root.val]
+
+		self.getTopView(root.left, hd - 1, d)
+		self.getTopView(root.right, hd + 1, d)
+
+t =Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+t.topView()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 159 
+File path: C:\Users\sudhe\Documents\Placements\Trees\VerticalOrderTravarsal.py
+
+
+'''
+	
+	Given a tree print vertical traversal of the given tree.
+
+	Time complexity : O(n)
+	Space complexity : O(h)
+
+'''
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.minm = 0
+		self.maxm = 0
+
+	def insertNodes(self):
+		self.root = Node(1)
+		self.root.left = Node(2)
+		self.root.right = Node(3)
+		self.root.left.left = Node(4)
+		self.root.left.right = Node(5)
+		self.root.right.left = Node(6)
+		self.root.right.right = Node(7)
+		self.root.right.left.right = Node(8)
+		self.root.right.right.right = Node(9)
+
+	def findMinMax(self):
+		self.findMinMaxUtil(self.root, 0)
+		
+	def findMinMaxUtil(self, root, hd):
+		if(not root):
+			return
+		if(hd < self.minm):
+			self.minm = hd
+
+		if(hd > self.maxm):
+			self.maxm = hd
+
+		self.findMinMaxUtil(root.left, hd-1)
+		self.findMinMaxUtil(root.right, hd+1)
+
+	def printVerticalTraversal(self, root, lineNo, hd):
+		if(not root):
+			return
+
+		if(hd == lineNo):
+			print(root.val,end=" ")
+
+		self.printVerticalTraversal(root.left, lineNo, hd-1)
+		self.printVerticalTraversal(root.right, lineNo, hd+1)
+
+	def verticalOrder(self):
+		self.findMinMax()
+		for lineNo in range(self.minm, self.maxm+1, 1):
+			self.printVerticalTraversal(self.root, lineNo, 0)
+			print()
+
+t = Tree()
+t.insertNodes()
+t.verticalOrder()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 160 
+File path: C:\Users\sudhe\Documents\Placements\Trees\VerticalOrderUsingDLL.py
+
+
+'''
+	
+	Given a tree print vertical traversal of the given tree.
+
+	Time complexity : O(n)
+	Space complexity : O(h)
+
+'''
+class Node:
+	def __init__(self, val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class DllNode:
+	def __init__(self, val):
+		self.left = None
+		self.lst = [val]
+		self.right = None
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.minm = 0
+		self.maxm = 0
+
+	def insertNodes(self):
+		self.root = Node(1)
+		self.root.left = Node(2)
+		self.root.right = Node(3)
+		self.root.left.left = Node(4)
+		self.root.left.right = Node(5)
+		self.root.right.left = Node(6)
+		self.root.right.right = Node(7)
+		self.root.right.left.right = Node(8)
+		self.root.right.right.right = Node(9)
+
+	def verticalOrder(self):
+		
+
+t = Tree()
+t.insertNodes()
+t.verticalOrder()
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 161 
+File path: C:\Users\sudhe\Documents\Placements\Trees\VerticalSum.py
+
+
+'''
+	Print the vertical sum of the given tree.
+
+	Time complexity : O(n)
+	Space complexity : O(n)
+'''
+
+class DLLNode:
+	def __init__(self):
+		self.prev = None
+		self.val = 0
+		self.next = None
+class Node:
+
+	def __init__(self, val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+
+	def __init__(self):
+		self.root = None
+
+	def insert(self, val):
+		temp=self.root
+		if(not temp):
+			self.root = Node(val)
+			return
+
+		q = [temp]
+		while(len(q) != 0):
+			temp = q.pop(0)
+			if(not temp.left):
+				temp.left = Node(val)
+				break
+			else:
+				q.append(temp.left)
+
+			if(not temp.right):
+				temp.right = Node(val)
+				break
+			else:
+				q.append(temp.right)
+
+	def verticalSum(self):
+		self.DLL = DLLNode()
+		self.DLL.val += self.root.val
+		self.calculateVerticalSum(self.root)
+		self.printDLL()
+
+	def calculateVerticalSum(self,root):
+		if(not root):
+			return
+
+		if(root.left):
+			if(not self.DLL.prev):
+				temp = DLLNode()
+				temp.val += root.left.val
+				temp.next = self.DLL 
+				self.DLL.prev = temp
+				self.DLL = self.DLL.prev
+			else:
+				self.DLL = self.DLL.prev
+				self.DLL.val += root.left.val
+			self.calculateVerticalSum(root.left)
+			self.DLL = self.DLL.next
+
+		if(root.right):
+			if(not self.DLL.next):
+				temp = DLLNode()
+				temp.val += root.right.val
+				self.DLL.next = temp
+				temp.prev = self.DLL 
+				self.DLL = self.DLL.next
+			else:
+				self.DLL = self.DLL.next
+				self.DLL.val += root.right.val
+			self.calculateVerticalSum(root.right)
+			self.DLL = self.DLL.prev
+
+	def printDLL(self):
+		temp = self.DLL
+		while(temp.prev != None):
+			temp = temp.prev
+		while(temp):
+			print(temp.val, end = " ")
+			temp = temp.next
+		print()
+
+t = Tree()
+vals = list(map(int, input().split()))
+for val in vals:
+	t.insert(val)
+
+t.verticalSum()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Program Number : 162 
+File path: C:\Users\sudhe\Documents\Placements\Trees\VerticalTraversalUsingHmap.py
+
+
+'''
+	print the vertical traversal of the tree.
+
+	Time complexity : O(n)
+'''
+
+class Node:
+	def __init__(self,val):
+		self.left = None
+		self.right = None
+		self.val = val
+
+class Tree:
+	def __init__(self):
+		self.root = None
+		self.minm = 0
+		self.maxm = 0
+
+	def insertNodes(self):
+		self.root = Node(1)
+		self.root.left = Node(2)
+		self.root.right = Node(3)
+		self.root.left.left = Node(4)
+		self.root.left.right = Node(5)
+		self.root.right.left = Node(6)
+		self.root.right.right = Node(7)
+		self.root.right.left.right = Node(8)
+		self.root.right.right.right = Node(9)
+
+	def verticalTraversal(self):
+		d = dict()
+		hd = 0
+		self.getVerticalTraversal(self.root, hd, d)
+		for value in sorted(d):
+			for ele in d[value]:
+				print(ele, end = " ")
+			print()
+
+	def getVerticalTraversal(self, root, hd, d):
+		if(not root):
+			return
+
+		try:
+			d[hd].append(root.val)
+		except:
+			d[hd] = [root.val]
+
+		self.getVerticalTraversal(root.left, hd - 1, d)
+		self.getVerticalTraversal(root.right, hd + 1, d)
+
+t =Tree()
+t.insertNodes()
+t.verticalTraversal()
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
